@@ -12,6 +12,7 @@
         "type-check": "tsc --noEmit"
     },
     "devDependencies": {
+        "@types/node": "^22.14.1",
         "concurrently": "^8.2.2",
         "eslint": "^9.21.0",
         "nodemon": "^3.1.9",
