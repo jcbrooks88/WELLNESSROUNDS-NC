@@ -1,0 +1,10 @@
+// CLIENT CLIENT CLIENT
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "moduleResolution": "Bundler"
+    },
+    "include": ["src"]
+  }
+  
