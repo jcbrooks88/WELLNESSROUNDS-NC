@@ -3,7 +3,7 @@
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
       "jsx": "react-jsx",
-      "module": "es2015",
+      "module": "es2020",
       "moduleResolution": "Bundler"
     },
 
