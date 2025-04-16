@@ -7,7 +7,7 @@
       "dev": "nodemon --watch src --exec \"node --loader ts-node/esm\" src/server.ts",
       "build": "tsc",
       "start": "node dist/server.js",
-      "prestart": "yarn build",
+      "prestart": "npm run build",
       "seed": "ts-node src/seed/seedDatabase.ts",
       "type-check": "tsc --noEmit",
       "clean": "rm -rf dist"
