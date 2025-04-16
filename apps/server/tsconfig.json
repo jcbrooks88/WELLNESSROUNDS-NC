@@ -14,5 +14,8 @@
       "outDir": "./dist",
       "rootDir": "./src",
     },
+    "ts-node": {
+      "esm": true
+    },
     "include": ["src"],
   }

@@ -1,4 +1,4 @@
-import { User } from '../../models/User.js';
+import { User } from '../../mongoDB/models/User.js';
 import { generateToken } from '../../utils/generateToken.js';
 
 export const resolvers = {

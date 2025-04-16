@@ -1,5 +1,5 @@
-import userResolvers from "./userResolvers";
-import postResolvers from "./postResolvers";
+import userResolvers from "./userResolvers.js";
+import postResolvers from "./postResolvers.js";
 
 export const resolvers = {
   Query: {
