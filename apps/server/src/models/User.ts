@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,7 +13,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, 'Must match a valid email address'],
+      match: [/^\S+@\S+\.\S+$/, 'Must match a valid email address'],
     },
     password: {
       type: String,
@@ -29,21 +30,45 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    bio: { type: String},
-    workHistory: [
-      {
-        position: { type: String },
-        company: { type: String },
-        startDate: { type: Date },
-        endDate: { type: Date },
-        description: { type: String },
-      },
-    ],
+    bio: { type: String },
+    workHistory: {
+      type: [
+        {
+          position: { type: String },
+          company: { type: String },
+          startDate: { type: Date },
+          endDate: { type: Date },
+          description: { type: String },
+        },
+      ],
+      default: [],
+    },
     about: { type: String },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      transform: function (_doc, ret) {
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
 );
+
+// Hash password before saving
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+// Compare incoming password with hashed one
+userSchema.methods.isCorrectPassword = function (password: string) {
+  return bcrypt.compare(password, this.password);
+};
 
 export const User = mongoose.model('User', userSchema);

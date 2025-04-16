@@ -1,23 +1,13 @@
-import jwt from "jsonwebtoken";
-import { Request } from "express";
+import jwt from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET!;
-const expiration = "2h";
-
-export function signToken({ _id, email, username }: { _id: string, email: string, username: string }) {
-  return jwt.sign({ _id, email, username }, secret, { expiresIn: expiration });
-}
-
-export function authMiddleware({ req }: { req: Request }) {
-  const token = req.headers.authorization?.split(" ").pop() || "";
-  if (!token) return req;
+export const authenticate = (req: any) => {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.replace('Bearer ', '');
+  if (!token) return null;
 
   try {
-    const decoded = jwt.verify(token, secret);
-    (req as any).user = decoded;
+    return jwt.verify(token, process.env.JWT_SECRET!);
   } catch {
-    console.warn("Invalid token");
+    return null;
   }
-
-  return req;
-}
+};
