@@ -5,8 +5,9 @@
         "apps/*",
         "packages/*"
     ],
-    "scripts": {
-        "dev": "concurrently \"npm run dev --workspace=apps/client\" \"npm run dev --workspace=apps/server\"",
+   "scripts": {
+        "dev": "concurrently \"npm run dev --workspace=apps/client\" \"npm run predev-and-dev-server\"",
+        "predev-and-dev-server": "npm run build --workspace=apps/server && npm run dev --workspace=apps/server",
         "build": "npm run build --workspace=apps/client && npm run build --workspace=apps/server",
         "lint": "eslint .",
         "type-check": "tsc --noEmit"
