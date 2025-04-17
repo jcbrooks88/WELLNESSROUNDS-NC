@@ -1,11 +1,5 @@
-import mongoose, { Schema, Document } from "mongoose";
-
-export interface IDiscussion extends Document {
-  title: string;
-  content: string;
-  keywords: string[];
-  author: mongoose.Types.ObjectId;
-}
+import mongoose, { Schema } from "mongoose";
+import { IDiscussion } from "../types/discussionTypes.js";
 
 const DiscussionSchema = new Schema<IDiscussion>(
   {
