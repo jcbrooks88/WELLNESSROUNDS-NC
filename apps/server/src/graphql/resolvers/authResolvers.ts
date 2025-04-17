@@ -19,6 +19,7 @@ export const resolvers = {
       const token = generateToken({
         _id: user._id.toString(),
         email: user.email as string,
+        username: user.username as string,
       });
 
       return { ...user.toObject(), token };
@@ -32,13 +33,13 @@ export const resolvers = {
 
       if (!user) throw new Error('No user found with this email');
 
-      // We assume user is a hydrated Mongoose document with isCorrectPassword defined
       const valid = await (user as any).isCorrectPassword(password);
       if (!valid) throw new Error('Incorrect password');
 
       const token = generateToken({
         _id: user._id.toString(),
         email: user.email as string,
+        username: user.username as string,
       });
 
       return { ...user.toObject(), token };
