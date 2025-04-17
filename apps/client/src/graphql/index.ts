@@ -1,7 +1,12 @@
-export * from './apolloClient';
-export * from './graphqlRequest';
-export * from './graphqlMutation';
+// Export queries and mutations
 
-// import { graphqlRequest } from '@/lib/graphql';
-// import { graphqlMutation } from '@/lib/graphql';
-// import { DocumentNode } from "@apollo/client";
+// Export Apollo Client
+export { default as client } from './apolloClient';
+
+// Export utility functions
+export { graphqlMutation } from './graphqlMutation';
+export { graphqlRequest } from './graphqlRequest';
+
+
+
+// import { graphqlRequest, graphqlMutation, client} from './graphql';

@@ -3,4 +3,9 @@ import { commentResolvers } from './comments/commentResolver.js';
 import { userResolvers } from './user/index.js';
 import postResolvers from './posts/postResolver.js';
 
-export default [discussionResolvers, commentResolvers, userResolvers, postResolvers];
+export const resolvers = {
+  ...discussionResolvers,
+  ...commentResolvers,
+  ...userResolvers,
+  ...postResolvers,
+};
