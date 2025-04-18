@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reusable utility classes */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold py-2 px-4 rounded-2xl hover:bg-primaryHover transition duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-neutralText font-semibold py-2 px-4 rounded-2xl hover:bg-secondaryHover transition duration-300;
+  }
+
+  .btn-error {
+    @apply bg-error text-white font-semibold py-2 px-4 rounded-2xl hover:bg-red-700 transition duration-300;
+  }
+
+  .form-input {
+    @apply bg-inputBg border border-borderGray rounded-lg px-4 py-2 text-darkText focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+
+  .form-label {
+    @apply block text-neutralText font-medium mb-1;
+  }
+
+  .form-section {
+    @apply p-form bg-white shadow-card rounded-xl;
+  }
+
+  .card {
+    @apply bg-white shadow-card p-card rounded-2xl;
+  }
+
+  .modal {
+    @apply bg-white p-8 rounded-2xl shadow-modal;
+  }
+
+  .navbar {
+    @apply w-full flex items-center justify-between px-navbar-x py-navbar-y bg-lightBg shadow-nav;
+  }
+
+  .text-muted {
+    @apply text-mutedText text-sm;
+  }
+
+  .profile-bg {
+    @apply bg-profileBg p-6 rounded-xl;
+  }
+
+  .discussion-shadow {
+    @apply shadow-discussion;
+  }
+
+  .hero-section {
+    @apply bg-hero-pattern bg-cover bg-center text-white py-20 px-6;
+  }
+}
