@@ -1,0 +1,7 @@
+{
+  "directory": "./src/components",
+  "structure": "folders",
+  "exclude": ["**/__tests__/**", "**/*.test.tsx"],
+  "delete": true,
+  "barrelName": "index.ts"
+}
