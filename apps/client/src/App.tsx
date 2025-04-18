@@ -4,7 +4,7 @@ import AboutPage from "./pages/About";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import HomePage from "./pages/Home";
-//import "./App.css"; // import styles here
+import "./App.css";
 
 const App = () => {
   return (
