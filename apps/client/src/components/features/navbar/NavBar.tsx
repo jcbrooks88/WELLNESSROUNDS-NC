@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { LogoutButton } from "../login/LogoutButton";
-import "../../App.css"; 
 
 const NavBar: React.FC = () => {
   const { user } = useContext(AuthContext)!;

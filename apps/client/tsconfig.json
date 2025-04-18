@@ -4,11 +4,12 @@
     "compilerOptions": {
       "jsx": "react-jsx",
       "module": "es2020",
-      "moduleResolution": "Bundler"
+      "moduleResolution": "Bundler",
+      "paths": {
+        "@/*": ["apps/client/src/*"]
+      }
     },
-    "paths": {
-      "@/*": ["apps/client/src/*"]
-    },
+
     
     "include": ["src", "tailwind.config.js"]
 }

@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./components/features/navbar/NavBar";
+import Footer from "./components/features/footer/Footer";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import HomePage from "./pages/Home";
-import "./App.css";
+import "./styles/App.css";
 import './index.css';
-import './global.css';
 
 function App() {
   return (
     <div className="app-container">
       <Router>
+      <NavBar />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -21,6 +23,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
+        <Footer />
       </Router>
     </div>
   );
