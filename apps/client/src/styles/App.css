@@ -1,0 +1,559 @@
+/* Root container */
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3b3a36;
+    background-color: #f1f5f4;
+    background-image: url('/images/WellnessRNC.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+/* Forms */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 250px;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 24px;
+  border: 1px solid #d1d1d1; /* Light neutral border */
+  border-radius: 12px;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.input,
+.textarea {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border-radius: 6px;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7; /* Light neutral background */
+  transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #a3b18c; /* Pale moss green on focus */
+  outline: none;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Keywords */
+.keywords-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.keyword-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e0e0e0; /* Neutral grey background */
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Feedback */
+.error,
+.profile-error,
+.search-error {
+  color: #d9534f; /* Red for error messages */
+  font-size: 0.875rem;
+}
+
+.success {
+  color: #28a745; /* Green for success */
+  font-size: 0.875rem;
+}
+
+/* Buttons */
+.button,
+.safe-space-button,
+.btn-edit,
+.btn-save,
+.close-button {
+  padding: 6px 26px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.button {
+  background-color: #3b7d7b; /* Darker moss green */
+  color: #fff;
+}
+
+.button:hover {
+  background-color: #2c5e5b; /* Darker shade for hover */
+}
+
+.safe-space-button {
+  background-color: #3b7d7b; /* Pale moss green */
+  color: white;
+}
+
+.safe-space-button:hover {
+  background-color: #8f9a7f; /* Slightly darker moss green for hover */
+}
+
+.btn-edit {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn-edit:hover {
+  background-color: #ccc;
+}
+
+.btn-save {
+  background-color: #a3b18c;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #8f9a7f;
+}
+
+.close-button {
+  background-color: #777;
+  color: white;
+}
+
+.close-button:hover {
+  background-color: #8f9a7f;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #a3b18c;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Search Section */
+.search-bar-container {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.search-again-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-loading {
+  margin-top: 10px;
+}
+
+.search-results {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.search-result-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #a3b18c;
+  width: 100%;
+  max-width: 260px;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.search-result-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.search-author {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.keyword-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.keyword-pill {
+  display: inline-block;
+  margin: 6px;
+  padding: 6px 12px;
+  background-color: #a3b18c;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Discussions */
+.discussion-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #a3b18c;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.discussion-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.discussion-title {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.author-info {
+  color: #777;
+  margin-top: 0.3rem;
+}
+
+.discussion-content {
+  margin-top: 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.discussion-tags {
+  margin-top: 1.5rem;
+}
+
+.tag {
+  display: inline-block;
+  background: #e0e0e0;
+  color: #333;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+/* Profile Section */
+.profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #e8eedf;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.profile-heading {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.profile-subheading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.profile-info {
+  font-size: 1rem;
+  color: #555;
+  text-align: right;
+}
+
+.profile-message {
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+}
+
+.profile-about-edit,
+.profile-about-view {
+  margin-top: 1rem;
+}
+
+.profile-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.profile-work-history {
+  margin-top: 2rem;
+}
+
+.work-history-item {
+  margin-bottom: 1.5rem;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent; /* Light neutral background */
+  color: #3b3a36;
+
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  transition: all 0.3s ease;
+
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  color: #444;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  color: #3b7d7b; /* Dark moss green */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #a3b18c; /* Pale moss green on hover */
+  text-decoration: underline;
+}
+
+/* Contact Section */
+.contact-container {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-input,
+.contact-textarea {
+  padding: 12px;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: #6c7740; 
+  outline: none;
+}
+
+.contact-textarea {
+  height: 100px;
+}
+
+.contact-button {
+  padding: 12px;
+  background-color: #2c5e5b; 
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contact-button:hover {
+  background-color: #55672e; 
+}
+
+/* About Section */
+.about-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #a3b18c;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+/* Global Body */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-image: url('/assets/WellnessRNC.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+  background-color: #f9f9f9;
+}
+
+/* App Container */
+.app {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Timeline Container */
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Post Card */
+.post-card {
+  background: #e8eedf;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Header */
+.post-header h3 {
+  margin: 0 0 0.3rem;
+}
+
+/* Comment List */
+.comment-list {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ddd;
+}
+
+/* Individual Comment */
+.comment {
+  margin-bottom: 0.5rem;
+}
+
+/* Like Button */
+.like-button {
+  background: transparent;
+  border: none;
+  color: #e63946; /* Bright red accent */
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+/* Post Form */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Post Form Inputs & Textarea */
+.post-form input,
+.post-form textarea {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Post Form Button */
+.post-form button {
+  padding: 0.5rem;
+  background: #2c5e5b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pages-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #a3b18c;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
