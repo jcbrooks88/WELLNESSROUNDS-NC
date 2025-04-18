@@ -6,6 +6,9 @@
       "module": "es2020",
       "moduleResolution": "Bundler"
     },
-
+    "paths": {
+      "@/*": ["apps/client/src/*"]
+    },
+    
     "include": ["src", "tailwind.config.js"]
 }
