@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { SIGNUP_MUTATION } from "../../graphql/mutations/mutations";
+import { SIGNUP_MUTATION } from "../../../graphql/mutations/mutations";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();

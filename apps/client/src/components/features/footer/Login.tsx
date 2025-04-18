@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN_MUTATION } from "../../graphql/mutations/mutations";
-import { AuthContext } from "../../context/AuthContext";
+import { LOGIN_MUTATION } from "../../../graphql/mutations/mutations";
+import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
