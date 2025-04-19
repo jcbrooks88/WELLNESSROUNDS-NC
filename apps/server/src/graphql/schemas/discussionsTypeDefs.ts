@@ -1,25 +1,25 @@
 import { gql } from 'apollo-server-express';
 
-const discussionTypeDefs = gql`
+export const discussionTypeDefs = gql`
+  type User {
+    _id: ID!
+    username: String!
+  }
+
   type Discussion {
     _id: ID!
     title: String!
     content: String!
-    username: String
-    keywords: [String]
-    author: User
-    createdAt: String
+    keywords: [String!]!
+    author: User!
   }
 
-  extend type Query {
-    discussions: [Discussion]
-    getDiscussion(id: ID!): Discussion
-    searchDiscussions(title: String!, keywords: [String!]!): [Discussion]
+  type Query {
+    getDiscussions: [Discussion]
   }
 
-  extend type Mutation {
+  type Mutation {
     createDiscussion(title: String!, content: String!, keywords: [String!]!): Discussion
   }
 `;
 
-export default discussionTypeDefs;
