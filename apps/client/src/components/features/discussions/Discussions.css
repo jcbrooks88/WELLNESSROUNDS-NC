@@ -15,4 +15,25 @@
     margin-top: 2rem;
     font-style: italic;
   }
+
+.discussion-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .discussion-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: white;
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+  }
+  .discussion-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .single-discussion {
+    padding: 2rem;
+    max-width: 700px;
+    margin: auto;
+  }
   
