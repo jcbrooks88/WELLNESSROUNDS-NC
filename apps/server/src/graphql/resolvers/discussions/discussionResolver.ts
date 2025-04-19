@@ -3,7 +3,7 @@ import Discussion from '../../../mongoDB/models/Discussion.js';
 export const discussionResolvers = {
   Query: {
     discussions: async () => Discussion.find().populate('author'),
-    getDiscussion: async (_: any, { id }: { id: string }) =>
+    getDiscussions: async (_: any, { id }: { id: string }) =>
       Discussion.findById(id).populate('author'),
     searchDiscussions: async (_: any, { title, keywords }: { title: string; keywords: string[] }) =>
       Discussion.find({
