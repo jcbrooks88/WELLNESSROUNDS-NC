@@ -18,7 +18,7 @@ const Header = () => {
 
         {/* Title and Nav */}
         <div className="flex flex-col justify-center flex-grow pl-4">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">WellnessRounds NC</h1>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Wellness Rounds NC</h1>
           <NavBar />
         </div>
       </div>
