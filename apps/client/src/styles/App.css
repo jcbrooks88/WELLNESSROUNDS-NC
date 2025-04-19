@@ -11,6 +11,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    box-sizing: border-box;
   }
 
 /* Forms */
@@ -466,13 +467,14 @@ a:hover {
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 10px;
   background-image: url('/assets/WellnessRNC.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
   background-color: #f9f9f9;
+  box-sizing: border-box;
 }
 
 /* App Container */

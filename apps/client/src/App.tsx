@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-//import NavBar from "./components/features/navbar/NavBar";
-import NavBar from "./components/features/navbar/NavBar";
 import Footer from "./components/features/footer/Footer";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import HomePage from "./pages/Home";
+import Header from "./components/features/header/Header";
 import "./styles/App.css";
 import './index.css';
 
@@ -14,7 +13,8 @@ function App() {
   return (
     <div className="app-container">
       <Router>
-      <NavBar />
+      <Header />
+      <div className="pt-32 px-4"> {/* Padding top so content isn’t hidden behind fixed header */}
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -24,6 +24,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
+      </div>
         <Footer />
       </Router>
     </div>
