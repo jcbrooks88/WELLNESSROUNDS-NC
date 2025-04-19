@@ -1,12 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import flowbiteReact from "flowbite-react/plugin/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), flowbiteReact(), tailwindcss()],
   build: {
-    outDir: path.resolve(__dirname, "dist"), // stays in client/dist
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
   server: {
@@ -15,6 +17,11 @@ export default defineConfig({
         target: "http://localhost:4000",
         changeOrigin: true,
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });
