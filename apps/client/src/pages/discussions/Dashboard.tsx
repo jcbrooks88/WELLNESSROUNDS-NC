@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import DiscussionForm from "../components/discussions/DiscussionForm";
+import DiscussionForm from "../../components/features/discussions/DiscussForm";
 import "../App.css";
 
 const Dashboard = () => {

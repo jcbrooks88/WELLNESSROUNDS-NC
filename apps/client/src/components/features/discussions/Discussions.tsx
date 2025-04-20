@@ -1,4 +1,5 @@
 import React from "react";
+import DiscussionCard from "./DiscussCard"; // adjust path as needed
 import "./Discussions.css";
 
 interface Discussion {
@@ -22,13 +23,8 @@ const Discussions: React.FC<DiscussionsProps> = ({ discussions }) => {
 
   return (
     <section className="discussions-container">
-      {discussions.map(({ _id, title, content, keywords, author }) => (
-        <article key={_id} className="discussion-card">
-          <h2>{title || "Untitled Discussion"}</h2>
-          <p>{content || "No content provided."}</p>
-          <p><strong>Keywords:</strong> {keywords.join(", ") || "None"}</p>
-          <p><strong>Posted by:</strong> {author?.username || "Anonymous"}</p>
-        </article>
+      {discussions.map((discussion) => (
+        <DiscussionCard key={discussion._id} {...discussion} />
       ))}
     </section>
   );

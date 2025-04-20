@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { graphqlRequest } from "../../utils/api";
-import { SEARCH_DISCUSSIONS_QUERY } from "../../graphql/queries/graphql";
+import { graphqlRequest } from "../../../graphql";
+import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql";
 import "../../App.css";
 
 const keywordOptions = [
@@ -11,29 +11,38 @@ const keywordOptions = [
   "Self-Care",
   "Therapy",
   "Wellness",
-  "Support"
+  "Support",
 ];
 
+interface Discussion {
+  _id: string;
+  title: string;
+  content: string;
+  author: {
+    username: string;
+  };
+}
+
 interface SearchBarProps {
-  onResults?: (results: any[]) => void;
+  onResults?: (results: Discussion[]) => void;
 }
 
 export default function SearchBar({ onResults }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [filteredKeywords, setFilteredKeywords] = useState<string[]>([]);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Discussion[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      onResults?.([]);
-      return;
-    }
-
     const delaySearch = setTimeout(async () => {
+      if (!query.trim()) {
+        setResults([]);
+        onResults?.([]);
+        return;
+      }
+
       setLoading(true);
       setError(null);
 
@@ -54,15 +63,16 @@ export default function SearchBar({ onResults }: SearchBarProps) {
           }
         );
 
-        setResults(data.searchDiscussions);
-        onResults?.(data.searchDiscussions);
+        const fetched = data.searchDiscussions || [];
+        setResults(fetched);
+        onResults?.(fetched);
       } catch (err) {
         console.error("Search error:", err);
         setError("Error fetching search results.");
         onResults?.([]);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     }, 500);
 
     return () => clearTimeout(delaySearch);
@@ -79,9 +89,10 @@ export default function SearchBar({ onResults }: SearchBarProps) {
     );
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
+
     setFilteredKeywords(
       value
         ? keywordOptions.filter((k) =>
@@ -105,7 +116,7 @@ export default function SearchBar({ onResults }: SearchBarProps) {
       <input
         type="text"
         className="search-input"
-        placeholder="Search by keyword (Burnout, Mental Health, etc.) or title..."
+        placeholder="Search by keyword or title..."
         value={query}
         onChange={handleInputChange}
       />
@@ -136,7 +147,9 @@ export default function SearchBar({ onResults }: SearchBarProps) {
               onClick={() => handleResultClick(discussion._id)}
             >
               <h3>{highlightMatch(discussion.title)}</h3>
-              <p className="search-author">By {discussion.author?.username ?? "Unknown"}</p>
+              <p className="search-author">
+                By {discussion.author?.username || "Anonymous"}
+              </p>
               <p>{highlightMatch(discussion.content.slice(0, 60))}...</p>
             </div>
           ))}

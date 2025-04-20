@@ -5,11 +5,17 @@ export const discussionResolvers = {
     discussions: async () => Discussion.find().populate('author'),
     getDiscussions: async (_: any, { id }: { id: string }) =>
       Discussion.findById(id).populate('author'),
-    searchDiscussions: async (_: any, { title, keywords }: { title: string; keywords: string[] }) =>
-      Discussion.find({
-        title: { $regex: title, $options: 'i' },
-        keywords: { $in: keywords },
-      }),
+    searchDiscussions: async (_: any, { title, keywords }: { title?: string; keywords?: string[] }) => {
+      const filters = [];
+      if (title) {
+        filters.push({ title: { $regex: title, $options: "i" } });
+      }
+      if (keywords && keywords.length > 0) {
+        filters.push({ keywords: { $in: keywords } });
+      }
+    const query = filters.length > 0 ? { $or: filters } : {};
+    return await Discussion.find(query).populate("author");
+    },
   },
   Mutation: {
     createDiscussion: async (
