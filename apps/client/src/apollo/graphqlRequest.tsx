@@ -2,10 +2,7 @@ import client from '../apollo/apolloClient';
 import { DocumentNode } from "@apollo/client";
 
 export const graphqlRequest = async (
-  query: DocumentNode,
-  variables: Record<string, any> = {},
-  context: { headers?: Record<string, string> } = {}
-) => {
+query: DocumentNode, variables: Record<string, any> = {}, undefined: undefined, p0: { Authorization: string; }, context: { headers?: Record<string, string>; } = {}) => {
   try {
     const result = await client.query({
       query,
