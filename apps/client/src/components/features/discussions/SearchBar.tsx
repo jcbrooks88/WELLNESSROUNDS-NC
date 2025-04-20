@@ -2,7 +2,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { graphqlRequest } from "../../../apollo";
 import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/query";
-import "../../App.css";
+import "../../../styles/App.css";
 
 const keywordOptions = [
   "Mental Health", "Burnout", "Career Change", "Self-Care", "Therapy", "Wellness", "Support", "Fitness", "Nutrition", "Work-Life Balance"

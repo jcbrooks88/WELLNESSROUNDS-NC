@@ -3,7 +3,7 @@ import Discussions from "../../components/features/discussions/Discussions";
 import SearchBar from "../../components/features/discussions/SearchBar";
 import SearchResultsList from "../../components/features/discussions/SearchResultsList";
 import { useDiscussions } from "../../components/hooks/useDiscussions";
-import "../App.css";
+import "../../styles/App.css";
 
 export default function DiscussionPage() {
   const { discussions: allDiscussions, loading, error } = useDiscussions();

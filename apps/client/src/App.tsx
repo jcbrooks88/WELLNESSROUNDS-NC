@@ -8,7 +8,7 @@ import HomePage from "./pages/Home";
 import Header from "./components/features/header/Header";
 import DiscussionsPage from "./pages/discussions/DiscussionPage";
 import SingleDiscussionPage from "./pages/discussions/SingleDiscussionPage";
-import Dashboard from "./pages/discussions/Dashboard"
+import Dashboard from "./pages/discussions/DashboardPage"
 import "./styles/App.css";
 import './index.css';
 
