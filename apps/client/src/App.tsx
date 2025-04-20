@@ -6,8 +6,9 @@ import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import HomePage from "./pages/Home";
 import Header from "./components/features/header/Header";
-import DiscussionsPage from "./pages/DiscussionsPage";
+import DiscussionsPage from "./pages/discussions/DiscussionPage";
 import SingleDiscussionPage from "./pages/discussions/SingleDiscussionPage";
+import Dashboard from "./pages/discussions/Dashboard"
 import "./styles/App.css";
 import './index.css';
 
@@ -25,7 +26,8 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/discussions" element={<DiscussionsPage />} />
-            <Route path="/discussions/:id" element={<SingleDiscussionPage />} 
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/discussions/:id" element={<SingleDiscussionPage />} />
           </Routes>
         </main>
       </div>
