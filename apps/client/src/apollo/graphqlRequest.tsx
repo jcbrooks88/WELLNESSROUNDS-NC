@@ -1,4 +1,4 @@
-import client from './apolloClient';
+import client from '../apollo/apolloClient';
 import { DocumentNode } from "@apollo/client";
 
 export const graphqlRequest = async (
