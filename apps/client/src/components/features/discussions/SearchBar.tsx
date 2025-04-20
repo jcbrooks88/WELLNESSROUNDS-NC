@@ -5,13 +5,7 @@ import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/query";
 import "../../App.css";
 
 const keywordOptions = [
-  "Mental Health",
-  "Burnout",
-  "Career Change",
-  "Self-Care",
-  "Therapy",
-  "Wellness",
-  "Support",
+  "Mental Health", "Burnout", "Career Change", "Self-Care", "Therapy", "Wellness", "Support", "Fitness", "Nutrition", "Work-Life Balance"
 ];
 
 interface Discussion {
