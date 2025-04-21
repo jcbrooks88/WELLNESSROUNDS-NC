@@ -1,11 +1,11 @@
 import { discussionResolvers } from './discussions/discussionResolver.js';
-import { commentResolvers } from './comments/commentResolver.js';
+//import { commentResolvers } from './comments/commentResolver.js';
 import { userResolvers } from './user/index.js';
-import postResolvers from './posts/postResolver.js';
+//import postResolvers from './posts/postResolver.js';
 
 export const resolvers = {
   ...discussionResolvers,
-  ...commentResolvers,
+  //...commentResolvers,
   ...userResolvers,
-  ...postResolvers,
+  //...postResolvers,
 };

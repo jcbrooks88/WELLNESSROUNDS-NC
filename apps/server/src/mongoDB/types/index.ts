@@ -1,2 +1,2 @@
 export * from './userTypes.js';
-export * from './postTypes.js';
+export * from './discussionTypes.js';

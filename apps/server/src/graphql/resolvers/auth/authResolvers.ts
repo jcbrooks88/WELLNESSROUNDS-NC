@@ -1,5 +1,5 @@
-import { User } from '../../mongoDB/models/User.js';
-import { generateToken } from '../../utils/generateToken.js';
+import { User } from '../../../mongoDB/models/User.js';
+import { generateToken } from '../../../utils/generateToken.js';
 
 export const resolvers = {
   Query: {

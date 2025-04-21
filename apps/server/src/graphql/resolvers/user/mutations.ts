@@ -40,9 +40,5 @@ export const userMutations = {
     const token = generateToken({ _id: user._id.toString(), username: user.username, email: user.email });
     return { ...user.toObject(), token };
   },
-
-  updateAbout: async (_: any, { about }: { about: string }, context: any) => {
-    if (!context.user) throw new GraphQLError("Unauthorized");
-    return await User.findByIdAndUpdate(context.user._id, { about }, { new: true });
-  },
 };
+
