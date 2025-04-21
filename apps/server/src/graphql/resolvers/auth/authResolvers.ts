@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt"; // 👈 Add this to the top
 import { User } from '../../../mongoDB/models/User.js';
 import { generateToken } from '../../../utils/generateToken.js';
 
@@ -8,6 +9,7 @@ export const resolvers = {
       return await User.findById(context.user.id);
     }
   },
+
   Mutation: {
     register: async (
       _: any,
@@ -29,20 +31,24 @@ export const resolvers = {
       _: any,
       { email, password }: { email: string; password: string }
     ) => {
-      const user = await User.findOne({ email });
+      try {
+        const user = await User.findOne({ email });
+        if (!user) throw new Error('No user found with this email');
 
-      if (!user) throw new Error('No user found with this email');
+        const valid = await bcrypt.compare(password, user.password);
+        if (!valid) throw new Error('Incorrect password');
 
-      const valid = await (user as any).isCorrectPassword(password);
-      if (!valid) throw new Error('Incorrect password');
+        const token = generateToken({
+          _id: user._id.toString(),
+          email: user.email as string,
+          username: user.username as string,
+        });
 
-      const token = generateToken({
-        _id: user._id.toString(),
-        email: user.email as string,
-        username: user.username as string,
-      });
-
-      return { ...user.toObject(), token };
+        return { ...user.toObject(), token };
+      } catch (err) {
+        console.error("Login error:", err);
+        throw new Error("Server error during login");
+      }
     }
   }
 };

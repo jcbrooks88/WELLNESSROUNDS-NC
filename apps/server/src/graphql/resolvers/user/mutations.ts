@@ -1,5 +1,4 @@
 import { AuthenticationError } from "apollo-server-express";
-import { GraphQLError } from "graphql";
 import { generateToken } from "../../../utils/generateToken.js";
 import { User } from "../../../mongoDB/models/User.js";
 import bcrypt from "bcrypt";
@@ -32,13 +31,42 @@ export const userMutations = {
   },
 
   login: async (_: any, { email, password }: { email: string; password: string }) => {
-    const user = await User.findOne({ email });
-    if (!user || !(await (user as any).isCorrectPassword(password))) {
-      throw new AuthenticationError("Invalid credentials");
-    }
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Invalid credentials");
+      }
+  
+      const validPassword = await bcrypt.compare(password, user.password);
+      if (!validPassword) {
+        throw new AuthenticationError("Invalid credentials");
+      }
 
-    const token = generateToken({ _id: user._id.toString(), username: user.username, email: user.email });
-    return { ...user.toObject(), token };
+      console.log("Preparing to generate token with payload:", {
+        _id: user._id.toString(),
+        username: user.username,
+        email: user.email,
+      });
+      
+  
+      const token = generateToken({
+        _id: user._id.toString(),
+        username: user.username,
+        email: user.email,
+      });
+  
+      return { ...user.toObject(), token };
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error("Login error stack:", err.stack);
+      } else {
+        console.error("An unknown error occurred during login");
+      }
+      console.error("Login error name:", err instanceof Error ? err.name : "Unknown error");
+      console.error("Login error message:", err instanceof Error ? err.message : "Unknown error");
+      throw new Error("Server error during login");
+    }    
   },
 };
+
 

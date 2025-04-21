@@ -51,10 +51,16 @@ async function startServer() {
       resolvers,
       persistedQueries: false,
       context: ({ req }) => {
-        const authResult = authenticate({ req });
-        return { user: (authResult && typeof authResult !== 'string' ? authResult.user : null) };
+        const user = authenticate(req);
+        if (!user) {
+          console.warn('No user found in request auth header');
+        } else {
+          console.log('Authenticated user:', user);
+        }
+        return { user };
       },
     });
+      
 
     await server.start();
     server.applyMiddleware({ app, path: '/graphql' });
