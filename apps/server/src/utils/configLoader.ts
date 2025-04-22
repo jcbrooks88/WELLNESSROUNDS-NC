@@ -1,18 +1,15 @@
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { logger } from './logger.js';
+dotenv.config()
 
-// ES module __dirname workaround
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export const ENV = {
+  NODE_ENV: process.env.NODE_ENV || 'development',
+  PORT: process.env.PORT || '4000',
+  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
+  JWT_SECRET: process.env.JWT_SECRET!,
+  REFRESH_SECRET: process.env.REFRESH_SECRET!,
+  MONGODB_URI: process.env.MONGODB_URI!,
+};
 
-export function loadEnvConfig() {
-  const envPath = path.resolve(__dirname, '../../../packages/config/.env');
-  dotenv.config({ path: envPath });
-
-  logger.info('Environment variables loaded');
-  logger.info(`Environment: ${process.env.NODE_ENV}`);
-  logger.info(`Frontend Origin: ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
-  logger.info(`Mongo URI: ${process.env.MONGODB_URI ? '✔️ Loaded' : '❌ Missing'}`);
+if (!ENV.JWT_SECRET || !ENV.REFRESH_SECRET) {
+  throw new Error('Missing required JWT environment variables');
 }

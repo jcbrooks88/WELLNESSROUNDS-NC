@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache, createHttpLink, ApolloLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 console.log(import.meta.env.VITE_GRAPHQL_URI);
@@ -7,6 +7,8 @@ const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_URI,
   credentials: "include",  // Make sure cookies are included in requests, if needed
 });
+console.log("GraphQL URI:", import.meta.env.VITE_GRAPHQL_URI);
+
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
@@ -19,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: ApolloLink.from([authLink, httpLink]),
   cache: new InMemoryCache(),
 });
 

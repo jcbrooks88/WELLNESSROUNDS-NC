@@ -10,6 +10,20 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_DISCUSSIONS = gql`
+  query {
+    getDiscussions {
+      _id
+      title
+      content
+      keywords
+      author {
+        username
+      }
+    }
+  }
+`;
+
 export const GET_DISCUSSION_BY_ID = gql`
   query GetDiscussionById($id: ID!) {
     getDiscussion(id: $id) {

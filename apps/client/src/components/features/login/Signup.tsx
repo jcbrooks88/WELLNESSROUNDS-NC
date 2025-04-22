@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { SIGNUP_MUTATION } from "../../../graphql/mutations";
 
 const Signup: React.FC = () => {
@@ -15,7 +15,8 @@ const Signup: React.FC = () => {
 
   const [signup, { loading, error }] = useMutation(SIGNUP_MUTATION, {
     onCompleted: () => {
-      alert("Signup complete! Redirecting to login...");
+      alert("Signup complete! Redirecting...");
+      login(data.signup.token);
       navigate("/login");
     },
   });

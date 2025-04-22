@@ -1,22 +1,14 @@
 import jwt from 'jsonwebtoken';
+import { ENV } from '../utils/configLoader.js';
 
-interface UserPayload {
-  _id: string;
-  email: string;
-  username: string;
+const ACCESS_SECRET = process.env.JWT_SECRET;
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+if (!ACCESS_SECRET) {
+  throw new Error('JWT_SECRET is not defined in the environment variables');
 }
 
-export const generateToken = (user: UserPayload): string => {
-  const secret = process.env.JWT_SECRET as string;
-  const expiresIn = process.env.TOKEN_EXPIRES_IN || '4h';
+export const generateAccessToken = (user: any) =>
+  jwt.sign({ data: user }, ENV.JWT_SECRET, { expiresIn: '60m' });
 
-  if (!secret) {
-    throw new Error('JWT_SECRET is not defined in environment variables');
-  }
-
-  return jwt.sign(
-    { id: user._id, email: user.email },
-    secret,
-    { expiresIn: expiresIn as jwt.SignOptions['expiresIn'] }
-  );
-};
+export const generateRefreshToken = (user: any) =>
+  jwt.sign({ data: user }, ENV.REFRESH_SECRET, { expiresIn: '7d' });

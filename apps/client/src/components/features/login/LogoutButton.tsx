@@ -9,8 +9,10 @@ export const LogoutButton = () => {
 
   const handleLogout = () => {
     logout();
+    alert("You've been logged out.");
     navigate("/login");
   };
+  
 
   return (
     <Button onClick={handleLogout} variant="secondary">

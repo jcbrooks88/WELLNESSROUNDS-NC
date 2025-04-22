@@ -15,11 +15,17 @@ export const discussionTypeDefs = gql`
   }
 
   type Query {
+    # Returns all discussions
     getDiscussions: [Discussion]
+
+    # Returns a single discussion by ID
+    getDiscussionByID(id: ID!): Discussion
+
+    # Search discussions by title and/or keywords
+    searchDiscussions(title: String, keywords: [String!]): [Discussion]
   }
 
   type Mutation {
     createDiscussion(title: String!, content: String!, keywords: [String!]!): Discussion
   }
 `;
-

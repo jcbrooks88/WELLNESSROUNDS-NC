@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"; // 👈 Add this to the top
 import { User } from '../../../mongoDB/models/User.js';
-import { generateToken } from '../../../utils/generateToken.js';
+import { generateAccessToken } from '../../../utils/generateToken.js';
 
 export const resolvers = {
   Query: {
@@ -18,7 +18,7 @@ export const resolvers = {
       const user = new User({ username, email, password });
       await user.save();
 
-      const token = generateToken({
+      const token = generateAccessToken({
         _id: user._id.toString(),
         email: user.email as string,
         username: user.username as string,
@@ -32,13 +32,13 @@ export const resolvers = {
       { email, password }: { email: string; password: string }
     ) => {
       try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).select('+password');
         if (!user) throw new Error('No user found with this email');
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) throw new Error('Incorrect password');
 
-        const token = generateToken({
+        const token = generateAccessToken({
           _id: user._id.toString(),
           email: user.email as string,
           username: user.username as string,

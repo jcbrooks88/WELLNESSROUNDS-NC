@@ -5,22 +5,20 @@ import mongoose from 'mongoose';
 import connectDB from '../mongoDB/config/connection.js';
 import { User } from '../mongoDB/models/User.js';
 import Discussion from '../mongoDB/models/Discussion.js';
-import { logger } from '../utils/logger.js'; // 💡 centralized logger
-
 
 export const seedDatabase = async () => {
   try {
     await connectDB();
-    logger.info('⚡ MongoDB connected');
+    console.log('⚡ MongoDB connected');
 
     await mongoose.connection.dropDatabase();
-    logger.warn('🧹 Dropped existing database');
+    console.log('🧹 Dropped existing database');
 
     // Sample user
     const sampleUser = new User({
       username: 'jane_doe',
       email: 'jane@example.com',
-      password: 'password123', // Consider hashing if used beyond dev
+      password: 'password123',
       firstName: 'Jane',
       lastName: 'Doe',
       bio: 'Healthcare professional with a passion for mental health advocacy. Transitioning into tech!',
@@ -45,7 +43,7 @@ export const seedDatabase = async () => {
     });
 
     await sampleUser.save();
-    logger.success(`👤 Created user: ${sampleUser.username}`);
+    console.log(`👤 Created user: ${sampleUser.username}`);
 
     const discussions = await Discussion.insertMany([
       {
@@ -80,13 +78,10 @@ export const seedDatabase = async () => {
       },
     ]);
 
-    logger.success(`🗣️ Seeded ${discussions.length} discussions`);
-    logger.success('✅ Seeded all data successfully');
+    console.log(`🗣️ Seeded ${discussions.length} discussions`);
+    console.log('✅ Seeded all data successfully');
   } catch (err) {
-    logger.error('❌ Error during seeding:');
+    console.log('❌ Error during seeding:');
     console.error(err);
-  } finally {
-    mongoose.connection.close(); // Clean exit after seeding
-    logger.info('🔌 MongoDB connection closed');
-  }
+  } 
 };

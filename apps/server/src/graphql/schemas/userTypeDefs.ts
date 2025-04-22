@@ -5,9 +5,13 @@ export const userTypeDefs = gql`
     _id: ID!
     username: String!
     email: String!
+    discussions: [Discussion!]!
   }
 
    type AuthPayload {
+    _id: ID!
+    username: String!
+    email: String!
     token: String!
     user: User!
   }
@@ -18,15 +22,13 @@ export const userTypeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): AuthPayload!
-  }
-
-  extend type Mutation {
+    refreshAccessToken: AuthPayload!
     register(
       username: String!
       firstName: String!
       lastName: String!
       email: String!
       password: String!
-    ): User!
+    ): AuthPayload!
   }
 `;

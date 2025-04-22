@@ -1,11 +1,14 @@
 import { userQueries } from "./queries.js";
-import { userMutations } from "./mutations.js";
+import { userResolver } from "./mutations.js";
 
 export const userResolvers = {
   Query: {
+    ...userResolver.Query,
     ...userQueries,
+    // ...otherResolvers.Query
   },
   Mutation: {
-    ...userMutations,
-  },
+    ...userResolver.Mutation,
+    // ...otherResolvers.Mutation
+  }
 };

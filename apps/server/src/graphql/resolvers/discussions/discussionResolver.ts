@@ -2,21 +2,34 @@ import Discussion from '../../../mongoDB/models/Discussion.js';
 
 export const discussionResolvers = {
   Query: {
-    discussions: async () => Discussion.find().populate('author'),
-    getDiscussions: async (_: any, { id }: { id: string }) =>
-      Discussion.findById(id).populate('author'),
-    searchDiscussions: async (_: any, { title, keywords }: { title?: string; keywords?: string[] }) => {
+    // Returns all discussions
+    getDiscussions: async () => {
+      return await Discussion.find().populate('author');
+    },
+
+    // Returns a single discussion by ID
+    getDiscussionByID: async (_: any, { id }: { id: string }) => {
+      return await Discussion.findById(id).populate('author');
+    },
+
+    // Search by title and/or keywords
+    searchDiscussions: async (
+      _: any,
+      { title, keywords }: { title?: string; keywords?: string[] }
+    ) => {
       const filters = [];
       if (title) {
-        filters.push({ title: { $regex: title, $options: "i" } });
+        filters.push({ title: { $regex: title, $options: 'i' } });
       }
       if (keywords && keywords.length > 0) {
         filters.push({ keywords: { $in: keywords } });
       }
-    const query = filters.length > 0 ? { $or: filters } : {};
-    return await Discussion.find(query).populate("author");
+
+      const query = filters.length > 0 ? { $or: filters } : {};
+      return await Discussion.find(query).populate('author');
     },
   },
+
   Mutation: {
     createDiscussion: async (
       _: any,
@@ -25,7 +38,12 @@ export const discussionResolvers = {
     ) => {
       const username = context.user?.username;
       const author = context.user?._id;
-      return Discussion.create({ title, content, keywords, username, author });
+
+      if (!author) {
+        throw new Error('Authentication required');
+      }
+
+      return await Discussion.create({ title, content, keywords, author });
     },
   },
 };

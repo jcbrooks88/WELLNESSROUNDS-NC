@@ -17,9 +17,20 @@ const Login = () => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    loginUser({ variables: { email, password } });
+    try {
+      // Call the GraphQL mutation
+      const { data } = await loginUser({ 
+        variables: { email, password } 
+      });
+
+      // The token is now available in the response, no need for REST request
+      login(data.login.token);
+      navigate("/");
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (
@@ -43,11 +54,11 @@ const Login = () => {
           required
         />
         <div>
-        <button className="button" type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          <button className="button" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </div>
-        {error && <p className="error">{error.message}</p>}
+        {error && <p className="error">Login failed: {error.message}</p>}
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 export const GET_DISCUSSIONS = gql`
-  query GetDiscussions {
+  query {
     getDiscussions {
       _id
       title
