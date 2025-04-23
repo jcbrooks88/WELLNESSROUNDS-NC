@@ -1,1 +1,1 @@
-export * from "./query"; // This exposes SEARCH_DISCUSSIONS_QUERY
+export * from "./queries/getUsers"; // This exposes SEARCH_DISCUSSIONS_QUERY

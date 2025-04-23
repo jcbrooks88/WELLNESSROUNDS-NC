@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { data, useNavigate } from "react-router-dom";
-import { SIGNUP_MUTATION } from "../../../graphql/mutations";
+import { useNavigate } from "react-router-dom";
+import { SIGNUP_MUTATION } from "../../../graphql/mutations/userMutations";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ const Signup: React.FC = () => {
   });
 
   const [signup, { loading, error }] = useMutation(SIGNUP_MUTATION, {
-    onCompleted: () => {
+    onCompleted: ({ signup }) => {
       alert("Signup complete! Redirecting...");
-      login(data.signup.token);
+      login(signup.token);
       navigate("/login");
     },
   });
@@ -90,3 +90,7 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
+function login(token: any) {
+  throw new Error("Function not implemented.");
+}
+

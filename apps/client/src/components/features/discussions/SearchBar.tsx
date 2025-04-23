@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { graphqlRequest } from "../../../apollo";
-import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/query";
+import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/queries/searchDiscussions";
 import "../../../styles/App.css";
 
 const keywordOptions = [

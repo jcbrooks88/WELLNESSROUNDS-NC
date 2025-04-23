@@ -1,5 +1,5 @@
 import React from "react";
-import { useDiscussions } from "../../hooks/useDiscussions";
+import { useDiscussions } from "../../../graphql/hooks/useDiscussions";
 import { Link } from "react-router-dom";
 import "./Discussions.css";
 

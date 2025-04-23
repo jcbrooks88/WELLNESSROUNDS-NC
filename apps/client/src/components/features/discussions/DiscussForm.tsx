@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateDiscussion } from "../../hooks/useCreateDiscussion";
+import { useCreateDiscussion } from "../../../graphql/hooks/useCreateDiscussion";
 
 const keywordOptions = [
   "Mental Health", "Burnout", "Career Change", "Self-Care",

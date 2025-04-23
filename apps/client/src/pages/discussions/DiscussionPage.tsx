@@ -2,7 +2,7 @@ import { useState } from "react";
 import Discussions from "../../components/features/discussions/Discussions";
 import SearchBar from "../../components/features/discussions/SearchBar";
 import SearchResultsList from "../../components/features/discussions/SearchResultsList";
-import { useDiscussions } from "../../components/hooks/useDiscussions";
+import { useDiscussions } from "../../graphql/hooks/useDiscussions";
 import "../../styles/App.css";
 
 export default function DiscussionPage() {

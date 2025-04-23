@@ -12,6 +12,8 @@ export const discussionTypeDefs = gql`
     content: String!
     keywords: [String!]!
     author: User!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type Query {
