@@ -16,7 +16,7 @@ const DiscussionCard: React.FC<DiscussionCardProps> = ({
   _id,
   title,
   content,
-  keywords,
+  keywords = [],
   author,
 }) => {
   return (
@@ -25,7 +25,7 @@ const DiscussionCard: React.FC<DiscussionCardProps> = ({
         <h2>{title || "Untitled Discussion"}</h2>
         <p>{content ? `${content.substring(0, 100)}...` : "No content available."}</p>
         <p>
-          <strong>Keywords:</strong> {keywords.length ? keywords.join(", ") : "None"}
+        <strong>Keywords:</strong> {keywords?.length ? keywords.join(", ") : "None"}
         </p>
         <p>
           <strong>Posted by:</strong> {author?.username || "Anonymous"}

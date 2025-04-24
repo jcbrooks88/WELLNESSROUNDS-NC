@@ -1,8 +1,6 @@
 // Combines all typeDefs
-import { userTypeDefs } from "./userTypeDefs.js";
-//import { postTypeDefs } from "./postTypeDefs.js";
-//import commentTypeDefs from "./commentsTypeDefs.js";
-import { discussionTypeDefs } from "./discussionsTypeDefs.js";
+import { userTypeDefs } from "./user.js";
+import { discussionTypeDefs } from "./discussions.js";
 import { mergeTypeDefs } from "@graphql-tools/merge";
 
 export const typeDefs = mergeTypeDefs([userTypeDefs, discussionTypeDefs]);

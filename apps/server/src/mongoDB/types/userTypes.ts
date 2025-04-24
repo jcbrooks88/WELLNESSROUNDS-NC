@@ -20,9 +20,15 @@ export interface IUser {
     comments?: string[];
     createdAt?: Date;
     updatedAt?: Date;
+    comparePassword(candidatePassword: string): Promise<boolean>;
   }
 
-  export interface IUserMethods {
+export interface IUserMethods {
     isCorrectPassword(password: string): Promise<boolean>;
   }
-  
+
+export interface UserPayload {
+    username: string;
+    email: string;
+    _id: string;
+  }  

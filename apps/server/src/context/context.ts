@@ -1,11 +1,11 @@
 import { authenticate } from '../utils/auth.js';
 
-export const context = ({ req }: { req?: any }) => {
+export const context = ({ req, res }: { req?: any, res?: any }) => {
   if (!req || !req.headers) {
     console.warn("No request object found in context");
-    return { user: null };
+    return { req, res, user: null };
   }
 
   const user = authenticate(req);
-  return { user };
+  return { req, res, user };
 };

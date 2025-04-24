@@ -8,7 +8,7 @@ if (!ACCESS_SECRET) {
 }
 
 export const generateAccessToken = (user: any) =>
-  jwt.sign({ data: user }, ENV.JWT_SECRET, { expiresIn: '60m' });
+  jwt.sign({ data: { _id: user._id, email: user.email, username: user.username } }, ENV.JWT_SECRET, { expiresIn: '60m' });
 
 export const generateRefreshToken = (user: any) =>
-  jwt.sign({ data: user }, ENV.REFRESH_SECRET, { expiresIn: '7d' });
+  jwt.sign({ data: { _id: user._id, email: user.email, username: user.username } }, ENV.REFRESH_SECRET, { expiresIn: '7d' });

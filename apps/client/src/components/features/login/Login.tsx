@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN_MUTATION } from "../../../graphql/mutations";
+import { LOGIN_USER } from "../../../graphql/user/mutations.js";
 import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,9 +10,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginUser, { loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
-      login(data.login.token);
+      console.log("Login data:", data); // Log data to check structure
+      login(data.login.token, data.login.user);
       navigate("/");
     },
   });
@@ -20,14 +21,15 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Call the GraphQL mutation
       const { data } = await loginUser({ 
         variables: { email, password } 
       });
+      console.log("Login response:", data); // Log the response
 
-      // The token is now available in the response, no need for REST request
-      login(data.login.token);
-      navigate("/");
+      if (data && data.login) {
+        login(data.login.token, data.login.user);
+        navigate("/");
+      }
     } catch (err) {
       console.error("Login failed:", err);
     }

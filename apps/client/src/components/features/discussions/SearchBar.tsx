@@ -1,11 +1,13 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { graphqlRequest } from "../../../apollo";
-import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/queries/searchDiscussions";
+import { graphqlRequest } from "../../../api/graphqlRequest";
+import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/discussion/queries.js";
+import { useAuth } from "../../../context/AuthContext"; // 👈 import useAuth
 import "../../../styles/App.css";
 
 const keywordOptions = [
-  "Mental Health", "Burnout", "Career Change", "Self-Care", "Therapy", "Wellness", "Support", "Fitness", "Nutrition", "Work-Life Balance"
+  "Mental Health", "Burnout", "Career Change", "Self-Care", "Therapy",
+  "Wellness", "Support", "Fitness", "Nutrition", "Work-Life Balance"
 ];
 
 interface Discussion {
@@ -28,6 +30,7 @@ export default function SearchBar({ onResults }: SearchBarProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { token } = useAuth(); // 👈 use token from context
 
   useEffect(() => {
     const delaySearch = setTimeout(async () => {
@@ -53,7 +56,7 @@ export default function SearchBar({ onResults }: SearchBarProps) {
           },
           undefined,
           {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: token ? `Bearer ${token}` : "",
           }
         );
 
@@ -70,23 +73,18 @@ export default function SearchBar({ onResults }: SearchBarProps) {
     }, 500);
 
     return () => clearTimeout(delaySearch);
-  }, [query]);
+  }, [query, token]); // 👈 include token as a dependency
 
   const highlightMatch = (text: string) => {
     const parts = text.split(new RegExp(`(${query})`, "gi"));
     return parts.map((part, i) =>
-      part.toLowerCase() === query.toLowerCase() ? (
-        <mark key={i}>{part}</mark>
-      ) : (
-        part
-      )
+      part.toLowerCase() === query.toLowerCase() ? <mark key={i}>{part}</mark> : part
     );
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-
     setFilteredKeywords(
       value
         ? keywordOptions.filter((k) =>

@@ -1,11 +1,15 @@
-import { discussionResolvers } from './discussions/discussionResolver.js';
-//import { commentResolvers } from './comments/commentResolver.js';
-import { userResolvers } from './user/index.js';
-//import postResolvers from './posts/postResolver.js';
+import { userResolver } from "./user/resolver.js";
+import { discussionResolver } from "./discussions/resolver.js";
 
 export const resolvers = {
-  ...discussionResolvers,
-  //...commentResolvers,
-  ...userResolvers,
-  //...postResolvers,
+  Query: {
+    ...userResolver.Query,
+    ...discussionResolver.Query,
+    // Add other resolvers here later
+  },
+  Mutation: {
+    ...userResolver.Mutation,
+    ...discussionResolver.Mutation,
+    // Add other resolvers here later
+  },
 };

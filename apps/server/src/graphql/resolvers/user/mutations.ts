@@ -1,67 +1,83 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import { User } from '../../../mongoDB/models/User.js';
-import { generateRefreshToken } from '../../../utils/generateToken.js';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { User } from "../../../mongoDB/models/User.js";
+import { generateAccessToken, generateRefreshToken } from "../../../utils/generateToken.js";
+import { ENV } from "../../../utils/configLoader.js";
 
-const REFRESH_SECRET = process.env.REFRESH_SECRET || 'refresh-secret';
+export const userMutations = {
+  register: async (_: any, args: any, { res }: any) => {
+    const { username, firstName, lastName, email, password } = args;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) throw new Error("User already exists");
 
-const Query = {
-  me: async (_: any, __: any, context: { user: { id: string } }) => {
-    if (!context.user) throw new Error('Not authenticated');
-    return await User.findById(context.user.id);
-  }
-};
-
-const Mutation = {
-  register: async (_: any, { username, email, password }: { username: string; email: string; password: string }) => {
-    const user = new User({ username, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, firstName, lastName, email, password: hashedPassword });
     await user.save();
 
-    const token = generateRefreshToken({ _id: user._id, email: user.email, username: user.username });
-    const refreshToken = jwt.sign({ _id: user._id }, REFRESH_SECRET, { expiresIn: '7d' });
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
 
-    return { ...user.toObject(), token, user };
+    if (res) {
+      res.cookie("jid", refreshToken, {
+        httpOnly: true,
+        path: "/graphql",
+        secure: ENV.NODE_ENV === "production",
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+    }
+
+    return {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      token: accessToken,
+      user: user.toObject(),
+    };
   },
 
-  login: async (_: any, { email, password }: { email: string; password: string }, { res }: { res: any }) => {
-    const user = await User.findOne({ email }).select('+password');
-    if (!user) throw new Error('No user found with this email');
+  login: async (_: any, { email, password }: any, { res }: any) => {
+    const user = await User.findOne({ email }).select("+password");
+    if (!user || !(await user.comparePassword(password))) {
+      throw new Error("Invalid credentials");
+    }
 
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) throw new Error('Incorrect password');
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
 
-    const token = generateRefreshToken({ _id: user._id, email: user.email, username: user.username });
-    const refreshToken = jwt.sign({ _id: user._id }, REFRESH_SECRET, { expiresIn: '7d' });
+    if (res) {
+      res.cookie("jid", refreshToken, {
+        httpOnly: true,
+        path: "/graphql",
+        secure: ENV.NODE_ENV === "production",
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+    }
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: false, // change to true in production with HTTPS
-      sameSite: 'Strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    return { ...user.toObject(), token, user };
+    return {
+      token: accessToken,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    };
   },
 
-  refreshAccessToken: async (_: any, __: any, { req }: { req: import('express').Request; res: import('express').Response }) => {
-    const token = req.cookies.refreshToken;
-    if (!token) throw new Error('No refresh token found');
+  refreshAccessToken: async (_: any, __: any, context: any) => {
+    const token = context.req?.cookies?.jid;
+    if (!token) throw new Error("No refresh token found");
 
     try {
-      const decoded = jwt.verify(token, REFRESH_SECRET) as { _id: string };
-      const user = await User.findById(decoded._id);
-      if (!user) throw new Error('User not found');
-
-      const newAccessToken = generateRefreshToken({ _id: user._id, email: user.email, username: user.username });
-
-      return { ...user.toObject(), token: newAccessToken, user };
+      const decoded: any = jwt.verify(token, ENV.REFRESH_SECRET);
+      const newAccessToken = generateAccessToken(decoded.data);
+      return { token: newAccessToken };
     } catch (err) {
-      throw new Error('Invalid or expired refresh token');
+      console.error("Refresh token error:", err);
+      throw new Error("Invalid or expired refresh token");
     }
   }
-};
-
-export const userResolver = {
-  Query,
-  Mutation
 };

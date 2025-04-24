@@ -48,14 +48,10 @@ async function startServer() {
       persistedQueries: false,
       context: ({ req, res }) => {
         const user = authenticate(req);
-        if (!user) {
-          console.warn('No user found in request auth header');
-        } else {
-          console.log('Authenticated user:', user);
-        }
-        // 👇 Provide both req and res to context
+        if (!user) console.warn('No user found in request auth header');
+        else console.log('Authenticated user:', user);
         return { req, res, user };
-      },
+      }
     });
 
     await server.start();

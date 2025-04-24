@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { SIGNUP_MUTATION } from "../../../graphql/mutations/userMutations";
+import { REGISTER_USER } from "../../../graphql/user/mutations.js";
+import { useAuth } from "../../../context/AuthContext"; // adjust path as needed
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
+
   const [formData, setFormData] = useState({
     username: "",
     firstName: "",
@@ -13,11 +16,15 @@ const Signup: React.FC = () => {
     password: "",
   });
 
-  const [signup, { loading, error }] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { loading, error }] = useMutation(REGISTER_USER, {
     onCompleted: ({ signup }) => {
-      alert("Signup complete! Redirecting...");
-      login(signup.token);
-      navigate("/login");
+      if (signup?.token) {
+        register(signup.token, signup.user);
+        alert("Signup complete! Redirecting...");
+        navigate("/");
+      } else {
+        alert("Signup succeeded, but no token was returned.");
+      }
     },
   });
 
@@ -90,7 +97,3 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
-function login(token: any) {
-  throw new Error("Function not implemented.");
-}
-

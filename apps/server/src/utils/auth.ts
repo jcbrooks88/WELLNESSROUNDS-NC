@@ -11,7 +11,7 @@ export const authenticate = (req: any) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    return decoded;
+    return (decoded as any).data;
   } catch (err: any) {
     if (err.name === 'TokenExpiredError') {
       console.warn("Token has expired.");
@@ -21,6 +21,7 @@ export const authenticate = (req: any) => {
     return null;
   }
 };
+
 
 export const clearToken = () => {
   localStorage.removeItem('token');

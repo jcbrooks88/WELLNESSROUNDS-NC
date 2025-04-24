@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateDiscussion } from "../../../graphql/hooks/useCreateDiscussion";
+import { useCreateDiscussion } from "../../../hooks/useDiscussions.js";
 
 const keywordOptions = [
   "Mental Health", "Burnout", "Career Change", "Self-Care",
@@ -16,7 +16,7 @@ const DiscussionForm: React.FC<DiscussionFormProps> = ({ onDiscussionCreated }) 
   const [keywords, setKeywords] = useState("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
-  const { createDiscussion, loading, error } = useCreateDiscussion();
+  const [createDiscussion, { loading, error }] = useCreateDiscussion();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +26,9 @@ const DiscussionForm: React.FC<DiscussionFormProps> = ({ onDiscussionCreated }) 
     ];
 
     try {
-      const newDiscussion = await createDiscussion({ title, content, keywords: keywordArray });
+      const newDiscussion = await createDiscussion({
+        variables: { title, content, keywords: keywordArray }
+      });
 
       if (newDiscussion) {
         onDiscussionCreated?.(newDiscussion); // ✅ Pass new discussion to parent

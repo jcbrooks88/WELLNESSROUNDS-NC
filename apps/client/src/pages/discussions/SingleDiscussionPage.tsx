@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useDiscussionById } from "../../graphql/hooks/useDiscussionById"
+import { getDiscussionByID } from "../../hooks/useDiscussions.js";
 
 const SingleDiscussionPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { discussion, loading, error } = useDiscussionById(id || "");
+  const { data, loading, error } = getDiscussionByID(id || "");
+  const discussion = data?.discussion;
 
   if (loading) return <p>Loading discussion...</p>;
   if (error) return <p>Error loading discussion: {error.message}</p>;

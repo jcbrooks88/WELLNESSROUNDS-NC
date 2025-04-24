@@ -1,12 +1,20 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_DISCUSSION_BY_ID } from "../../../graphql/queries/getDiscussionById";
+import { GET_DISCUSSION_BY_ID } from "../../../graphql/discussion/queries.js";
+import { useAuth } from "../../../context/AuthContext"; // 👈 import useAuth
 
 export default function SearchResult() {
   const { id } = useParams<{ id: string }>();
+  const { token } = useAuth(); // 👈 get token from auth context
+
   const { data, loading, error } = useQuery(GET_DISCUSSION_BY_ID, {
     variables: { id },
     skip: !id,
+    context: {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    },
   });
 
   const discussion = data?.getDiscussion;
