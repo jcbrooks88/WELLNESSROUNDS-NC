@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Login from '../components/features/login/Login';
 
 const LoginPage = () => {

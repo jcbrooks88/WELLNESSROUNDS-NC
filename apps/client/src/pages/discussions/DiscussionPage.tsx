@@ -4,6 +4,7 @@ import SearchBar from "../../components/features/discussSearch/SearchBar";
 import SearchResultsList from "../../components/features/discussSearch/SearchResultsList";
 import { useDiscussions } from "../../hooks/useDiscussions";
 import "../../styles/App.css";
+import "./style.css";
 
 export default function DiscussionPage() {
   const { discussions: allDiscussions, loading, error } = useDiscussions();
