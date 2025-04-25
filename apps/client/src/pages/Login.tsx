@@ -5,9 +5,6 @@ const LoginPage = () => {
   return (
     <div className="login-page-container">
       <Login />
-      <p>
-        Not a member? <Link to="/signup">Signup here</Link>
-      </p>
     </div>
   );
 };

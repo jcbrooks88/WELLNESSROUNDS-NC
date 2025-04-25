@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Discuss.css";
+import "./styles.css";
 
 interface DiscussionCardProps {
   _id: string;

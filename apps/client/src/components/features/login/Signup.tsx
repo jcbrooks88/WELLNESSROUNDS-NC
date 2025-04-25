@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { REGISTER_USER } from "../../../graphql/user/mutations.js";
 import { useAuth } from "../../../context/AuthContext"; // adjust path as needed
+import "./styles.css"; 
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <input

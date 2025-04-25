@@ -3,6 +3,8 @@ import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../../graphql/user/mutations.js";
 import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import "./styles.css"; 
 
 const Login = () => {
   const { login } = useContext(AuthContext)!;
@@ -36,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -62,6 +64,9 @@ const Login = () => {
         </div>
         {error && <p className="error">Login failed: {error.message}</p>}
       </form>
+      <p>
+        Not a member? <Link to="/signup">Register</Link>
+      </p>
     </div>
   );
 };
