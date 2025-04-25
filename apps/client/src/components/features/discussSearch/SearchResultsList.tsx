@@ -1,5 +1,5 @@
 import React from "react";
-import DiscussionCard from "./DiscussCard"; // Adjust the path if needed
+import DiscussionCard from "../discussions/DiscussCard"; // Adjust the path if needed
 
 interface SearchResultsProps {
   results: any[];

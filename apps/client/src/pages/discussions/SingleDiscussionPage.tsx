@@ -5,7 +5,7 @@ import { getDiscussionByID } from "../../hooks/useDiscussions.js";
 const SingleDiscussionPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data, loading, error } = getDiscussionByID(id || "");
-  const discussion = data?.discussion;
+  const discussion = data?.getDiscussionByID;
 
   if (loading) return <p>Loading discussion...</p>;
   if (error) return <p>Error loading discussion: {error.message}</p>;

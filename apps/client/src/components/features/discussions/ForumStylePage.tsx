@@ -1,7 +1,7 @@
 import React from "react";
 import { useDiscussions } from "../../../hooks/useDiscussions.js";
 import { Link } from "react-router-dom";
-import "./Discussions.css";
+import "./Discuss.css";
 
 interface Discussion {
   _id: string;

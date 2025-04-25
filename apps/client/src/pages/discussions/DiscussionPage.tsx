@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Discussions from "../../components/features/discussions/Discussions";
-import SearchBar from "../../components/features/discussions/SearchBar";
-import SearchResultsList from "../../components/features/discussions/SearchResultsList";
+import SearchBar from "../../components/features/discussSearch/SearchBar";
+import SearchResultsList from "../../components/features/discussSearch/SearchResultsList";
 import { useDiscussions } from "../../hooks/useDiscussions";
 import "../../styles/App.css";
 

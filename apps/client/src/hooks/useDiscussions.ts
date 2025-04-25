@@ -4,7 +4,12 @@ import { CREATE_DISCUSSION } from '../graphql/discussion/mutations';
 import { GET_DISCUSSION_BY_ID } from '../graphql/discussion/queries';
 
 
-export const getDiscussionByID = (_p0?: string) => useQuery(GET_DISCUSSION_BY_ID); 
+export const getDiscussionByID = (id?: string) =>
+  useQuery(GET_DISCUSSION_BY_ID, {
+    variables: { id },
+    skip: !id,
+  });
+
 
 export function useDiscussions() {
   const { data, loading, error } = useQuery(GET_DISCUSSIONS);

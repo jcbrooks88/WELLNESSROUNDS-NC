@@ -1,6 +1,6 @@
 import React from "react";
 import DiscussionCard from "./DiscussCard"; // adjust path as needed
-import "./Discussions.css";
+import "./Discuss.css";
 
 interface Discussion {
   _id: string;

@@ -22,6 +22,11 @@ const NavBar: React.FC = () => {
             About
           </Link>
         </li>
+        <li className="navbar-item">
+              <Link to="/contact" className="navbar-link">
+                Contact Us
+              </Link>
+            </li>
 
         {user ? (
           <>
@@ -31,18 +36,8 @@ const NavBar: React.FC = () => {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/discussions" className="navbar-link">
-                Discussion Forum
-              </Link>
-            </li>
-            <li className="navbar-item">
               <Link to="/profile" className="navbar-link">
                 My Profile
-              </Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/contact" className="navbar-link">
-                Contact Us
               </Link>
             </li>
             <li className="navbar-item">

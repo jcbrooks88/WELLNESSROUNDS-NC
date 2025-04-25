@@ -27,7 +27,6 @@ mutation Login($email: String!, $password: String!) {
 
 `;
 
-
 export const REFRESH_TOKEN_MUTATION = gql`
   mutation RefreshToken {
     refreshAccessToken {

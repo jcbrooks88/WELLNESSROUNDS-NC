@@ -5,6 +5,9 @@ export const GET_DISCUSSIONS = gql`
     getDiscussions {
       _id
       title
+      content
+      createdAt
+      keywords
       author {
         username
       }

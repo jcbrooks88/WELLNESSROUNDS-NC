@@ -19,7 +19,7 @@ const Dashboard = () => {
   };
 
   const handleNavigateToDiscussion = () => {
-    navigate("/discussion");
+    navigate("/discussions");
   };
 
   return (
