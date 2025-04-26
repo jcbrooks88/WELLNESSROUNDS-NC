@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCreateDiscussion } from "../../../hooks/useDiscussions.js";
+import "./styles.css";
 
 const keywordOptions = [
   "Mental Health", "Burnout", "Career Change", "Self-Care",
@@ -40,14 +41,14 @@ const DiscussionForm: React.FC<DiscussionFormProps> = ({ onDiscussionCreated }) 
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create a Safe Space</h2>
-
+    <div className="discussions-form-container">
+    <form onSubmit={handleSubmit} className="discussions-form">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
         required
+        className="discussions-input"
       />
 
       <textarea
@@ -55,12 +56,13 @@ const DiscussionForm: React.FC<DiscussionFormProps> = ({ onDiscussionCreated }) 
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
         required
+        className="discussions-textarea"
       />
 
-      <div>
+      <section className="keyword-container">
         <p>Select Keywords:</p>
         {keywordOptions.map((keyword) => (
-          <label key={keyword} style={{ display: "inline-block", marginRight: "1rem" }}>
+          <label key={keyword} className="keyword-label">
             <input
               type="checkbox"
               checked={selectedKeywords.includes(keyword)}
@@ -71,24 +73,27 @@ const DiscussionForm: React.FC<DiscussionFormProps> = ({ onDiscussionCreated }) 
                     : [...prev, keyword]
                 );
               }}
+              className="keyword-checkbox"
             />
             {keyword}
           </label>
         ))}
-      </div>
 
       <input
         value={keywords}
         onChange={(e) => setKeywords(e.target.value)}
         placeholder="Add custom keywords (comma-separated)"
+        className="keyword-input"
       />
+  </section>
 
-      <button type="submit" disabled={loading}>
+      <button type="submit" disabled={loading} className="discussions-button">
         {loading ? "Posting..." : "Post Discussion"}
       </button>
 
       {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
     </form>
+  </div>
   );
 };
 

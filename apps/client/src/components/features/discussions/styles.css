@@ -1,48 +1,147 @@
-.discussions-container {
-    padding: 1rem;
-  }
-  
-  .empty-state {
-    text-align: center;
-    margin-top: 2rem;
-    font-style: italic;
-  }
+/* General container polish */
+.discussions-form-container {
+  padding: 32px;
+  max-width: 750px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 
-.discussion-card-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  .discussion-card {
-    padding: 16px;
-    margin-bottom: 16px;
-    max-width: 700px;
-    margin: 32px auto;
-    padding: 32px;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-  }
-  .discussion-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-  }
+.discussions-form-container:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
 
-  .single-discussion {
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-  }
-  
-  .single-discussion:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-  }
-  
-  
+/* Form structure */
+.discussions-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input + Textarea Styling */
+.discussions-input,
+.discussions-textarea,
+.keyword-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.discussions-input:focus,
+.discussions-textarea:focus,
+.keyword-input:focus {
+  border-color: #5b21b6; /* rich purple */
+  box-shadow: 0 0 0 3px rgba(91, 33, 182, 0.15);
+  outline: none;
+}
+
+.discussions-input {
+  height: 50px;
+}
+
+.discussions-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+/* Button styling */
+.discussions-button {
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.discussions-button:hover {
+  background: linear-gradient(135deg, #0d9488, #2dd4bf);
+  transform: translateY(-2px);
+}
+
+.discussions-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Keyword Section */
+.keyword-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background-color: #f1f5f9;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+}
+
+.keyword-container p {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Keyword checkboxes look like pill tags */
+.keyword-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px;
+  padding: 8px 14px;
+  background-color: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.keyword-label:hover {
+  background-color: #bae6fd;
+  transform: scale(1.05);
+}
+
+/* Hide ugly default checkbox */
+.keyword-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #94a3b8;
+  border-radius: 4px;
+  background-color: white;
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+
+.keyword-checkbox:checked {
+  background-color: #0ea5e9;
+  border-color: #0ea5e9;
+}
+
+.keyword-checkbox:checked::after {
+  content: "✔";
+  color: white;
+  display: block;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+}
+
+/* Error message */
+.error-message {
+  color: #dc2626;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  font-weight: 500;
+  text-align: center;
+}
