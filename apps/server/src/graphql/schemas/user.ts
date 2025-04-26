@@ -1,7 +1,6 @@
 import { gql } from "apollo-server-express";
 
 export const userTypeDefs = gql`
-  scalar Upload
 
   type User {
     _id: ID!
@@ -12,9 +11,18 @@ export const userTypeDefs = gql`
     discussions: [Discussion]
     aboutMe: String
     avatarUrl: String
-    workHistory: [String]
+    workHistory: [WorkHistory]
     profileComments: [ProfileComment]
   }
+
+  type WorkHistory {
+  _id: ID!
+  position: String!
+  company: String!
+  startDate: String
+  endDate: String
+  description: String
+}
 
   type ProfileComment {
     _id: ID!
@@ -46,8 +54,6 @@ export const userTypeDefs = gql`
     refreshAccessToken: AuthPayload
 
     updateAboutMe(aboutMe: String!): User
-
-    uploadAvatar(file: Upload!): User
 
     addProfileComment(username: String!, text: String!): ProfileComment
   }

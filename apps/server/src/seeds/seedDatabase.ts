@@ -14,19 +14,52 @@ export const seedDatabase = async () => {
     await mongoose.connection.dropDatabase();
     console.log('🧹 Dropped existing database');
 
-    // Sample user
+    // Create sample user
     const sampleUser = new User({
       username: 'jane_doe',
       email: 'jane@example.com',
       password: 'password123',
       firstName: 'Jane',
       lastName: 'Doe',
-      bio: 'Healthcare professional with a passion for mental health advocacy. Transitioning into tech!',
-      about: 'I’m a former nurse turned software developer. I love creating tools that make a difference in people’s lives.',
+      bio: 'Healthcare professional passionate about mental health advocacy.',
+      aboutMe: 'I’m a former nurse turned software developer. I love creating tools that make a difference in people’s lives.', // about (NOT aboutMe!)
+      avatarUrl: 'https://example.com/avatar.jpg',
+      workHistory: [
+        {
+          position: 'Registered Nurse',
+          company: 'General Hospital',
+          startDate: new Date('2015-01-01'),
+          endDate: new Date('2022-12-31'),
+          description: 'Provided patient care in a high-pressure environment.',
+        },
+        {
+          position: 'Junior Software Developer',
+          company: 'HealthTech Solutions',
+          startDate: new Date('2023-01-01'),
+          endDate: null, // Currently working
+          description: 'Developing healthcare applications.',
+        },
+      ],
+      profileComments: [], // Initialize as an empty array to avoid undefined
     });
 
     await sampleUser.save();
     console.log(`👤 Created user: ${sampleUser.username}`);
+
+    // Add some profile comments
+    (sampleUser.profileComments ?? []).push(
+      {
+        text: 'Welcome to the community!',
+        author: new mongoose.Types.ObjectId(sampleUser._id),
+      },
+      {
+        text: 'Excited to see your journey in tech!',
+        author: new mongoose.Types.ObjectId(sampleUser._id),
+      }
+    );
+
+    await sampleUser.save();
+    console.log('💬 Added profile comments');
 
     const discussions = await Discussion.insertMany([
       {
@@ -66,5 +99,5 @@ export const seedDatabase = async () => {
   } catch (err) {
     console.log('❌ Error during seeding:');
     console.error(err);
-  } 
+  }
 };

@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Footer from "./components/features/footer/Footer";
-import ContactPage from "./pages/Contact";
-import AboutPage from "./pages/About";
-import LoginPage from "./pages/Login";
-import SignupPage from "./pages/Signup";
-import HomePage from "./pages/Home";
-import Header from "./components/features/header/Header";
-import DiscussionsPage from "./pages/discussions/DiscussionPage";
-import SingleDiscussionPage from "./pages/discussions/SingleDiscussionPage";
-import Dashboard from "./pages/discussions/DashboardPage"
+import Footer from "./components/features/footer/Footer.js";
+import ContactPage from "./pages/Contact.js";
+import AboutPage from "./pages/About.js";
+import LoginPage from "./pages/Login.js";
+import SignupPage from "./pages/Signup.js";
+import HomePage from "./pages/Home.js";
+import ProfilePage from "./pages/Profile.js";
+import Header from "./components/features/header/Header.js";
+import DiscussionsPage from "./pages/discussions/DiscussionPage.js";
+import SingleDiscussionPage from "./pages/discussions/SingleDiscussionPage.js";
+import Dashboard from "./pages/discussions/DashboardPage.js"
 import "./styles/App.css";
 import './index.css';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/discussions" element={<DiscussionsPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/discussions/:id" element={<SingleDiscussionPage />} />
+            <Route path="/profile/:username" element={<ProfilePage />} />
           </Routes>
         </main>
       </div>

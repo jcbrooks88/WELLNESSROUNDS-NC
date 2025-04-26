@@ -36,11 +36,20 @@ export const GET_USER_PROFILE = gql`
     user(username: $username) {
       _id
       username
+      firstName
+      lastName
+      email
       aboutMe
       avatarUrl
-      workHistory
+      workHistory {
+        position
+        description
+        company
+        startDate
+        endDate
+      }
       profileComments {
-        id
+        _id
         text
         author {
           username

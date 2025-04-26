@@ -16,6 +16,7 @@ export const userQueries = {
     return {
       ...user,
       discussions,
+      workHistory: user.workHistory,
     };
   },
 
@@ -33,6 +34,7 @@ export const userQueries = {
     return {
       ...user,
       discussions,
+      workHistory: user.workHistory,
     };
   }
 };
