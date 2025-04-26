@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_USER_PROFILE, UPDATE_ABOUT_ME, UPLOAD_AVATAR, ADD_PROFILE_COMMENT } from "../graphql/queries";
+import { GET_USER_PROFILE } from "../../../graphql/user/queries.js";
+import { UPDATE_ABOUT_ME, UPLOAD_AVATAR, ADD_PROFILE_COMMENT } from "../../../graphql/user/mutations.js";
+
 import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
@@ -43,13 +45,45 @@ const UserProfile = () => {
 
   const handleAddComment = async () => {
     if (!commentText.trim()) return;
+  
     try {
-      await addProfileComment({ variables: { username, text: commentText } });
+      await addProfileComment({
+        variables: { username, text: commentText },
+        update(cache, { data }) {
+          if (!data?.addProfileComment) return;
+  
+          const newComment = data.addProfileComment;
+  
+          // Update the existing GET_USER_PROFILE cache
+          cache.modify({
+            id: cache.identify({ __typename: "User", id: user.id }),
+            fields: {
+              profileComments(existingComments = []) {
+                const newCommentRef = cache.writeFragment({
+                  data: newComment,
+                  fragment: gql`
+                    fragment NewProfileComment on ProfileComment {
+                      id
+                      text
+                      author {
+                        username
+                      }
+                    }
+                  `
+                });
+                return [newCommentRef, ...existingComments];
+              }
+            }
+          });
+        }
+      });
+  
       setCommentText("");
     } catch (err) {
       console.error(err);
     }
   };
+  
 
   return (
     <div className="max-w-4xl mx-auto p-4">
