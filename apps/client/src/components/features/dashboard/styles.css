@@ -1,0 +1,95 @@
+/* Main container for the Dashboard */
+.dashboard-container {
+    padding: 32px;
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    text-align: center;
+  }
+  
+  .dashboard-container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+  
+  /* Header text */
+  .dashboard-container h1 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #0f172a;
+  }
+  
+  /* Button group */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Buttons */
+  .safe-space-button {
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .safe-space-button:hover {
+    background: linear-gradient(135deg, #0d9488, #2dd4bf);
+    transform: translateY(-2px);
+  }
+  
+  /* Modal background */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 41, 59, 0.7); /* semi-dark backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal content box */
+  .modal-content {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Close button inside modal */
+  .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #475569;
+    transition: color 0.3s;
+  }
+  
+  .close-button:hover {
+    color: #0f766e;
+  }
+  

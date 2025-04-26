@@ -1,0 +1,82 @@
+/* Main Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: #ffffff;
+    padding: 16px 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* When scrolled */
+  .header-scrolled {
+    padding: 8px 24px;
+    background-color: #f0fdfa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Inner flex container */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Logo */
+  .header-logo {
+    flex-shrink: 0;
+    height: 64px;
+    width: 64px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
+  }
+  
+  /* Shrink logo slightly */
+  .header-scrolled .header-logo {
+    height: 48px;
+    width: 48px;
+  }
+  
+  /* Title + Nav container */
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-left: 16px;
+  }
+  
+  /* Site title */
+  .header-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+    transition: color 0.3s ease, font-size 0.3s ease;
+  }
+  
+  /* Title size smaller on scroll */
+  .header-scrolled .header-title {
+    font-size: 1.5rem;
+  }
+  
+  /* Small hover on title */
+  .header-title:hover {
+    color: #0d9488;
+  }
+  
+  
+  /* New: Hide header on scroll down */
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+  
+  /* New: Show header on scroll up */
+  .header-visible {
+    transform: translateY(0);
+  }
+  
