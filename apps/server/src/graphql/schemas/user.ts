@@ -1,6 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export const userTypeDefs = gql`
+  scalar Upload
+
   type User {
     _id: ID!
     username: String!
@@ -8,6 +10,16 @@ export const userTypeDefs = gql`
     lastName: String
     email: String!
     discussions: [Discussion]
+    aboutMe: String
+    avatarUrl: String
+    workHistory: [String]
+    profileComments: [ProfileComment]
+  }
+
+  type ProfileComment {
+    _id: ID!
+    text: String!
+    author: User!
   }
 
   type AuthPayload {
@@ -17,7 +29,7 @@ export const userTypeDefs = gql`
 
   type Query {
     me: User
-    user: User
+    user(username: String!): User
   }
 
   type Mutation {
@@ -32,5 +44,11 @@ export const userTypeDefs = gql`
     login(email: String!, password: String!): AuthPayload
 
     refreshAccessToken: AuthPayload
+
+    updateAboutMe(aboutMe: String!): User
+
+    uploadAvatar(file: Upload!): User
+
+    addProfileComment(username: String!, text: String!): ProfileComment
   }
 `;
