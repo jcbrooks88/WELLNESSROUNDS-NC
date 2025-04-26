@@ -1,8 +1,10 @@
+import { AuthenticationError } from "apollo-server-express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../../../mongoDB/models/User.js";
 import { generateAccessToken, generateRefreshToken } from "../../../utils/generateToken.js";
 import { ENV } from "../../../utils/configLoader.js";
+import { uploadFileToStorage } from "../../../utils/uploadFileToStorage.js"; // If you have one, else remove
 
 export const userMutations = {
   register: async (_: any, args: any, { res }: any) => {
@@ -79,5 +81,49 @@ export const userMutations = {
       console.error("Refresh token error:", err);
       throw new Error("Invalid or expired refresh token");
     }
+  },
+
+  updateAboutMe: async (_: any, { aboutMe }: any, context: any) => {
+    if (!context.user) throw new AuthenticationError("You must be logged in.");
+    const user = await User.findById(context.user._id);
+    if (!user) throw new Error("User not found.");
+
+    user.aboutMe = aboutMe;
+    await user.save();
+    return user.toObject();
+  },
+
+  uploadAvatar: async (_: any, { file }: any, context: any) => {
+    if (!context.user) throw new AuthenticationError("You must be logged in.");
+
+    const { createReadStream, filename } = await file;
+    const stream = createReadStream();
+
+    // Mock upload for now — you can replace with real S3 or Cloudinary logic
+    const avatarUrl = await uploadFileToStorage(stream, filename); // if no uploadFileToStorage, mock URL
+
+    const user = await User.findById(context.user._id);
+    if (!user) throw new Error("User not found.");
+
+    user.avatarUrl = avatarUrl;
+    await user.save();
+    return user.toObject();
+  },
+
+  addProfileComment: async (_: any, { username, text }: any, context: any) => {
+    if (!context.user) throw new AuthenticationError("You must be logged in.");
+
+    const targetUser = await User.findOne({ username });
+    if (!targetUser) throw new Error("User not found.");
+
+    const newComment = {
+      text,
+      author: context.user._id,
+    };
+
+    targetUser.profileComments.push(newComment as any);
+    await targetUser.save();
+
+    return newComment;
   }
 };

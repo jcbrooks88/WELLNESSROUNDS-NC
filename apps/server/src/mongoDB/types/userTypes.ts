@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface IWorkHistoryItem {
     position: string;
     company: string;
@@ -11,8 +13,9 @@ export interface IUser {
     username: string;
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
+    avatarUrl?: string;
     bio?: string;
     about?: string;
     workHistory?: IWorkHistoryItem[];
@@ -21,6 +24,11 @@ export interface IUser {
     createdAt?: Date;
     updatedAt?: Date;
     comparePassword(candidatePassword: string): Promise<boolean>;
+    profileComments?: Array<{
+      text: string;
+      author: mongoose.Types.ObjectId;
+      createdAt?: Date;
+    }>;
   }
 
 export interface IUserMethods {

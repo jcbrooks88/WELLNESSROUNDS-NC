@@ -2,7 +2,6 @@ import mongoose, { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 import { IUser, IUserMethods } from "../types/userTypes.js";
 
-// Schema type declaration using generics
 type UserModel = mongoose.Model<IUser, {}, IUserMethods>;
 
 const userSchema = new Schema<IUser, UserModel, IUserMethods>(
@@ -37,6 +36,8 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
     },
     bio: { type: String, default: "" },
     about: { type: String, default: "" },
+    avatarUrl: { type: String, default: "" },
+
     workHistory: {
       type: [
         {
@@ -49,8 +50,20 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
       ],
       default: [],
     },
+
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+
+    profileComments: {
+      type: [
+        {
+          text: { type: String, required: true },
+          author: { type: Schema.Types.ObjectId, ref: "User", required: true },
+          createdAt: { type: Date, default: Date.now },
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,
@@ -65,18 +78,18 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
 );
 
 // Virtual full name
-userSchema.virtual("fullName").get(function () {
+userSchema.virtual("fullName").get(function (this: IUser) {
   return `${this.firstName} ${this.lastName}`;
 });
 
-// Hash the password before saving
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+// Hash password before save
+userSchema.pre<IUser & mongoose.Document>("save", async function (next) {
+  if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
-// Add a method to compare passwords
+// Compare password method
 userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
   return await bcrypt.compare(candidatePassword, this.password);
 };
