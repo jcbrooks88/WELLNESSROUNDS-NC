@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { GET_USER_PROFILE } from "../../../graphql/user/queries.js";
 import { UPDATE_ABOUT_ME, UPLOAD_AVATAR, ADD_PROFILE_COMMENT } from "../../../graphql/user/mutations.js";
-
 import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
