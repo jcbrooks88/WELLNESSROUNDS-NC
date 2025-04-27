@@ -63,3 +63,20 @@
     min-height: 120px;
     resize: vertical;
   }
+
+  .login-button {
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); /* Deep green to buttercream */
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .login-button:hover {
+    background: linear-gradient(135deg, var(--color-tertiary), var(--color-accent)); /* Light green to terracotta */
+    transform: translateY(-2px);
+  }

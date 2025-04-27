@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Welcome Back, Let's Get You In!</h2>
       <form onSubmit={handleSubmit}>
         <input
           className="input"
@@ -58,7 +58,7 @@ const Login = () => {
           required
         />
         <div>
-          <button className="button" type="submit" disabled={loading}>
+          <button className="login-button" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
         </div>

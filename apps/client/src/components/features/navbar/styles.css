@@ -3,13 +3,14 @@
   background-color: transparent;
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  align-items: center;
+  margin-top: 4px;
 }
 
 /* NavBar list */
 .navbar-list {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -17,20 +18,56 @@
 
 /* Each Nav item */
 .navbar-item {
+  display: flex;
 }
 
 /* Links */
 .navbar-link {
-  color: var(--color-primary);
+  color: var(--color-tertiary);
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s, color 0.3s;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: 
+    background-color 0.3s ease, 
+    color 0.3s ease, 
+    transform 0.2s ease;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Underline pseudo-element */
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Hover effects */
 .navbar-link:hover {
-  background-color: var(--color-accent); 
+  background-color: var(--color-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Animate underline on hover */
+.navbar-link:hover::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Optional: Active link style (if you want to highlight current page) */
+.navbar-link.active {
+  background-color: var(--color-accent);
   color: #ffffff;
 }

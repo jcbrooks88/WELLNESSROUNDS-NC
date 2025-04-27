@@ -41,7 +41,7 @@ const Signup: React.FC = () => {
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
+      <h2>Join Us, It’s Time to Start!</h2>
       <form onSubmit={handleSubmit}>
         <input
           className="input"
@@ -89,7 +89,7 @@ const Signup: React.FC = () => {
           required
         />
         {error && <p className="error">Signup failed. Try again.</p>}
-        <button className="button" type="submit" disabled={loading}>
+        <button className="login-button" type="submit" disabled={loading}>
           {loading ? "Signing up..." : "Sign Up"}
         </button>
       </form>

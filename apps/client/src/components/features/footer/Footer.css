@@ -1,8 +1,59 @@
-
+/* Footer container */
 .footer {
-    background-color: #f8f8f8;
-    text-align: center;
-    padding: 1rem;
-    border-top: 1px solid #ddd;
-  }
+  background-color: transparent;
+  text-align: center;
+  padding: 2rem 1rem;
   
+  font-size: 0.95rem;
+  color: #666;
+  
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Footer inner container to center content */
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Links styling */
+.footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--color-heading);
+  text-decoration: underline;
+}
+
+/* Social links */
+.footer-social a {
+  margin: 0 10px;
+  color: var(--color-accent);
+}
+
+.footer-social a:hover {
+  color: var(--color-heading);
+}
+
+/* Footer links and text */
+.footer-links {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.footer-links a {
+  font-weight: 500;
+}
+
+/* Copyright text */
+.footer p {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 16px;
+  font-weight: 500;
+}
