@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../navbar/NavBar';
-import './Header.css';
+import './styles.css';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);

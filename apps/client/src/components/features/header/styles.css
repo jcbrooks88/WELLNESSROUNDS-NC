@@ -14,7 +14,7 @@
   /* When scrolled */
   .header-scrolled {
     padding: 8px 24px;
-    background-color: #f0fdfa;
+    background-color: var(--color-background);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
   
@@ -28,6 +28,10 @@
   
   /* Logo */
   .header-logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-heading);
     flex-shrink: 0;
     height: 64px;
     width: 64px;
@@ -54,7 +58,7 @@
   .header-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--color-tertiary);
     margin-bottom: 8px;
     transition: color 0.3s ease, font-size 0.3s ease;
   }
@@ -66,7 +70,7 @@
   
   /* Small hover on title */
   .header-title:hover {
-    color: #0d9488;
+    color: var(--color-accent);
   }
   
   
@@ -80,3 +84,8 @@
     transform: translateY(0);
   }
   
+  /* Optional smaller subtitle in header */
+.header-subtitle {
+    font-size: 1rem;
+    color: var(--color-tertiary); 
+  }
