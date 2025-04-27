@@ -1,6 +1,7 @@
 import { useUserProfile } from "../../../hooks/useProfile.js";
 import WorkHistoryItem from "./WorkHistoryItem";
 import ProfileComment from "./ProfileComment";
+import "./styles.css";
 
 const UserProfile = () => {
   const {
@@ -24,12 +25,12 @@ const UserProfile = () => {
   if (!user) return <div>No user data found.</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="user-profile">
       <div className="flex flex-col items-center">
         <img
           src={user.avatarUrl || "/default-avatar.png"}
           alt="User Avatar"
-          className="w-32 h-32 rounded-full object-cover mb-4"
+          className="user-avatar"
           onClick={() => fileInputRef.current?.click()}
         />
         <input
@@ -40,26 +41,25 @@ const UserProfile = () => {
           accept="image/*"
         />
 
-        <h1 className="text-2xl font-bold mb-2">{user.username}</h1>
+        <h1 className="user-name">{user.username}</h1>
 
         {/* About Me */}
         <div className="w-full mt-4">
-          <h2 className="text-xl font-semibold">About Me</h2>
+          <h2 className="section-title">About Me</h2>
           {isEditing ? (
-            <div className="mt-2">
+            <div className="about-me-edit">
               <textarea
-                className="w-full p-2 border rounded"
                 value={aboutMe}
                 onChange={(e) => setAboutMe(e.target.value)}
               />
-              <div className="flex gap-2 mt-2">
+              <div className="about-me-buttons">
                 <button className="btn-primary" onClick={handleAboutMeSave}>Save</button>
                 <button className="btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
               </div>
             </div>
           ) : (
             <p
-              className="mt-2 cursor-pointer"
+              className="about-me-text"
               onClick={() => {
                 setAboutMe(user.aboutMe || "");
                 setIsEditing(true);
@@ -72,9 +72,9 @@ const UserProfile = () => {
 
         {/* Work History */}
         <div className="w-full mt-6">
-          <h2 className="text-xl font-semibold">Work History</h2>
+          <h2 className="section-title">Work History</h2>
           {user.workHistory && user.workHistory.length > 0 ? (
-            <ul className="list-disc list-inside mt-2">
+            <ul className="work-history-list">
               {user.workHistory.map((job: { id?: string; [key: string]: any }, index: number) => {
                 const mappedJob = {
                   id: job.id,
@@ -93,8 +93,8 @@ const UserProfile = () => {
         </div>
 
         {/* Comments */}
-        <div className="w-full mt-6">
-          <h2 className="text-xl font-semibold">Comments</h2>
+        <div className="comment-section">
+          <h2 className="section-title">Comments</h2>
           <div className="mt-2">
             {user.profileComments.map((comment: { id?: string; [key: string]: any }, index: number) => {
               const mappedComment = {
@@ -106,10 +106,9 @@ const UserProfile = () => {
             })}
           </div>
 
-          <div className="flex gap-2 mt-4">
+          <div className="comment-input-container">
             <input
               type="text"
-              className="flex-1 p-2 border rounded"
               placeholder="Leave a comment..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}

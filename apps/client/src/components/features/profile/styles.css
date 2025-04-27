@@ -1,0 +1,185 @@
+/* UserProfile Component Styling */
+
+/* Profile container */
+.user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--color-background);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Avatar */
+  .user-avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border: 3px solid var(--color-primary);
+    transition: transform 0.3s ease;
+  }
+  
+  .user-avatar:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Username */
+  .user-name {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-heading);
+    margin-bottom: 1rem;
+  }
+  
+  /* Section titles */
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+  
+  /* About Me */
+  .about-me-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .about-me-text:hover {
+    background-color: #f0f4f1;
+  }
+  
+  /* About Me Editing */
+  .about-me-edit {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  .about-me-edit textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    resize: vertical;
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+  
+  .about-me-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-secondary);
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #eef3ee;
+  }
+  
+  /* Work History List */
+  .work-history-list {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 0;
+  }
+  
+  .work-history-item {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+  }
+  
+  .work-history-item p {
+    margin: 0.25rem 0;
+  }
+  
+  /* Comments */
+  .comment-section {
+    margin-top: 2rem;
+  }
+  
+  .comment {
+    background-color: #fff;
+    border: 1px solid var(--color-tertiary);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .comment-author {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 0.3rem;
+  }
+  
+  .comment-text {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+  
+  /* Comment Input */
+  .comment-input-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .comment-input-container input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .comment-input-container button {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 0.75rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .comment-input-container button:hover {
+    background-color: #a05335;
+  }
+  
