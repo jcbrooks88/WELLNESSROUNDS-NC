@@ -3,13 +3,14 @@ import { useQuery, useMutation, gql } from "@apollo/client";
 import { GET_USER_PROFILE } from "../graphql/user/queries";
 import { UPDATE_ABOUT_ME, UPLOAD_AVATAR, ADD_PROFILE_COMMENT } from "../graphql/user/mutations";
 import { useParams } from "react-router-dom";
+import { IUserProfile } from "@/graphql/user/types";
 
 export const useUserProfile = () => {
-  const { username } = useParams<{ username: string }>();
+  const { _id } = useParams<{ _id: string }>(); // 🔥 1. updated from "username" to "id"
 
-  const { loading, error, data } = useQuery(GET_USER_PROFILE, {
-    variables: { username },
-    skip: !username,
+  const { loading, error, data } = useQuery<{ user: IUserProfile }>(GET_USER_PROFILE, {
+    variables: { userId: _id },
+    skip: !_id,
   });
 
   const [aboutMe, setAboutMe] = useState<string>("");
@@ -42,16 +43,16 @@ export const useUserProfile = () => {
   };
 
   const handleAddComment = async () => {
-    if (!commentText.trim()) return;
-
+    if (!commentText.trim() || !user?._id) return; // 🛡️ safe guard
+  
     try {
       await addProfileComment({
-        variables: { username, text: commentText },
+        variables: { userId: user._id, text: commentText },
         update(cache, { data }) {
           if (!data?.addProfileComment) return;
-
+  
           const newComment = data.addProfileComment;
-
+  
           cache.modify({
             id: cache.identify({ __typename: "User", id: user._id }),
             fields: {
@@ -66,20 +67,21 @@ export const useUserProfile = () => {
                         username
                       }
                     }
-                  `
+                  `,
                 });
                 return [newCommentRef, ...existingComments];
-              }
-            }
+              },
+            },
           });
-        }
+        },
       });
-
+  
       setCommentText("");
     } catch (err) {
       console.error(err);
     }
   };
+  
 
   const user = data?.user;
 

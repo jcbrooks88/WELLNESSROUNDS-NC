@@ -22,3 +22,21 @@ export interface UserPayload {
     email: string;
     _id: string;
   }  
+
+  export interface IProfileComment {
+    _id: string;
+    text: string;
+    author: {
+      username: string;
+    };
+  }
+  
+  export interface IUserProfile extends IUser {
+    firstName: string;
+    lastName: string;
+    aboutMe?: string;
+    avatarUrl?: string;
+    workHistory: IWorkHistoryItem[];
+    profileComments: IProfileComment[];
+  }
+  

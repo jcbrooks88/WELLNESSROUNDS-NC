@@ -1,6 +1,6 @@
 type WorkHistoryItemProps = {
   job: {
-    id?: string;
+    _id: string;
     position: string;
     company: string;
     startDate: string;

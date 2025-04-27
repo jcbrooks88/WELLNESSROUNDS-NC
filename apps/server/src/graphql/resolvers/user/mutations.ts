@@ -92,23 +92,24 @@ export const userMutations = {
     return user.toObject();
   },
 
-  addProfileComment: async (_: any, { username, text }: any, context: any) => {
+  addProfileComment: async (_: any, { userId, text }: any, context: any) => {
     if (!context.user) throw new AuthenticationError("You must be logged in.");
-
-    const targetUser = await User.findOne({ username });
+  
+    const targetUser = await User.findById(userId);
     if (!targetUser) throw new Error("User not found.");
-
+  
     const newComment = {
       text,
       author: context.user._id,
     };
-
+  
     if (!targetUser.profileComments) {
       targetUser.profileComments = [];
     }
     targetUser.profileComments.push(newComment as any);
     await targetUser.save();
-
+  
     return newComment;
   }
+  
 };

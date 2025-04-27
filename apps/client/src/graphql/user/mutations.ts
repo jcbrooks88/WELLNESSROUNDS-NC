@@ -56,8 +56,8 @@ export const UPLOAD_AVATAR = gql`
 
 // Mutation: Add a comment to user's profile
 export const ADD_PROFILE_COMMENT = gql`
-  mutation AddProfileComment($username: String!, $text: String!) {
-    addProfileComment(username: $username, text: $text) {
+  mutation AddProfileComment($userId: ID!, $text: String!) {
+    addProfileComment(userId: $userId, text: $text) {
       _id
       text
       author {
@@ -66,3 +66,4 @@ export const ADD_PROFILE_COMMENT = gql`
     }
   }
 `;
+

@@ -10,24 +10,12 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className="navbar">
-
       <ul className="navbar-list">
-        <li className="navbar-item">
-          <Link to="/" className="navbar-link">
-            Home
-          </Link>
-        </li>
         <li className="navbar-item">
           <Link to="/about" className="navbar-link">
             About
           </Link>
         </li>
-        <li className="navbar-item">
-              <Link to="/contact" className="navbar-link">
-                Contact Us
-              </Link>
-            </li>
-
         {user ? (
           <>
             <li className="navbar-item">
@@ -36,10 +24,15 @@ const NavBar: React.FC = () => {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/profile" className="navbar-link">
+              <Link to={`/profile/${user?._id}`} className="navbar-link">
                 My Profile
               </Link>
             </li>
+            <li className="navbar-item">
+              <Link to="/contact" className="navbar-link">
+                Contact Us
+              </Link>
+          </li>
             <li className="navbar-item">
               <LogoutButton />
             </li>

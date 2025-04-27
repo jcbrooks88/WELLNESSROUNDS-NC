@@ -1,6 +1,6 @@
 type ProfileCommentProps = {
   comment: {
-    id?: string;
+    _id: string;
     text: string;
     author: {
       username: string;

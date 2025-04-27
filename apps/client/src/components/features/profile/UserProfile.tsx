@@ -3,6 +3,23 @@ import WorkHistoryItem from "./WorkHistoryItem";
 import ProfileComment from "./ProfileComment";
 import "./styles.css";
 
+interface WorkHistoryItemType {
+  _id?: string;
+  position?: string;
+  company?: string;
+  startDate?: Date;
+  endDate?: Date;
+  description?: string;
+}
+
+interface ProfileCommentType {
+  _id?: string;
+  text?: string;
+  author?: {
+    username: string;
+  };
+}
+
 const UserProfile = () => {
   const {
     loading,
@@ -28,7 +45,7 @@ const UserProfile = () => {
     <div className="user-profile">
       <div className="flex flex-col items-center">
         <img
-          src={user.avatarUrl || "/default-avatar.png"}
+          src={user.avatarUrl || "/images/WRNC.png"}
           alt="User Avatar"
           className="user-avatar"
           onClick={() => fileInputRef.current?.click()}
@@ -75,17 +92,18 @@ const UserProfile = () => {
           <h2 className="section-title">Work History</h2>
           {user.workHistory && user.workHistory.length > 0 ? (
             <ul className="work-history-list">
-              {user.workHistory.map((job: { id?: string; [key: string]: any }, index: number) => {
+              {user.workHistory.map((job: WorkHistoryItemType, index: number) => {
                 const mappedJob = {
-                  id: job.id,
+                  _id: job._id || index.toString(),
                   position: job.position || "Unknown Position",
                   company: job.company || "Unknown Company",
-                  startDate: job.startDate || "Unknown Start Date",
-                  endDate: job.endDate || undefined,
+                  startDate: job.startDate ? job.startDate.toString() : "Unknown Start Date",
+                  endDate: job.endDate ? job.endDate.toString() : undefined,
                   description: job.description || "No description provided",
                 };
-                return <WorkHistoryItem key={mappedJob.id || index} job={mappedJob} />;
+                return <WorkHistoryItem key={mappedJob._id} job={mappedJob} />;
               })}
+
             </ul>
           ) : (
             <p className="mt-2">No work history listed.</p>
@@ -96,14 +114,16 @@ const UserProfile = () => {
         <div className="comment-section">
           <h2 className="section-title">Comments</h2>
           <div className="mt-2">
-            {user.profileComments.map((comment: { id?: string; [key: string]: any }, index: number) => {
-              const mappedComment = {
-                id: comment.id,
-                text: comment.text || "No text provided",
-                author: comment.author || { username: "Unknown Author" },
-              };
-              return <ProfileComment key={mappedComment.id || index} comment={mappedComment} />;
-            })}
+          {user.profileComments.map((comment: ProfileCommentType, index: number) => {
+            const mappedComment = {
+              _id: comment._id || index.toString(),
+              text: comment.text || "No text provided",
+              author: comment.author || { username: "Unknown Author" },
+            };
+              return <ProfileComment key={mappedComment._id} comment={mappedComment} />;
+        })}
+
+
           </div>
 
           <div className="comment-input-container">

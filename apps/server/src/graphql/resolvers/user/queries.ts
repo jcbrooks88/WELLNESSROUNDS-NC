@@ -3,14 +3,15 @@ import { User } from "../../../mongoDB/models/User.js";
 import Discussion from "../../../mongoDB/models/Discussion.js";
 
 export const userQueries = {
-  user: async (_: any, { username }: any, context: any) => {
+  user: async (_: any, { userId }: any, context: any) => {
     if (!context.user) throw new AuthenticationError("You must be logged in.");
 
-    const user = await User.findOne({ username })
+    const user = await User.findById(userId)
       .populate("profileComments.author", "_id username avatarUrl")
       .lean();
 
     if (!user) throw new Error("User not found.");
+
     const discussions = await Discussion.find({ author: user._id }).lean();
 
     return {
@@ -38,3 +39,4 @@ export const userQueries = {
     };
   }
 };
+

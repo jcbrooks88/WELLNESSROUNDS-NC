@@ -29,7 +29,7 @@ function App() {
             <Route path="/discussions" element={<DiscussionsPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/discussions/:id" element={<SingleDiscussionPage />} />
-            <Route path="/profile/:username" element={<ProfilePage />} />
+            <Route path="/profile/:id" element={<ProfilePage />} />
           </Routes>
         </main>
       </div>
