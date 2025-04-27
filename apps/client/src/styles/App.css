@@ -19,6 +19,7 @@
   text-align: center;
   font-family: var(--font-body);
   color: var(--color-text);
+  background-image: ;
   background-color: #f1f5f4;
   background-size: cover;
   background-position: center;
@@ -79,3 +80,26 @@ a:hover {
 .app-container, .main-content, .form-container, .app, .timeline-container {
   font-family: var(--font-body);
 }
+
+.app-container {
+  background-image: url('/images/WRNC-home.jpg');
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-position: center center; /* Centers the image */
+  background-attachment: fixed; /* Keeps the image fixed while scrolling */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 100vh; /* Ensures the background image stretches across the full height */
+  width: 100%; /* Ensures the background image stretches across the full width */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Ensures no padding around the content */
+  position: relative; /* Ensures content stays above the background */
+  z-index: 1; /* Keeps the content above the background */
+}
+
+/* Optional: if you want the content inside to be centered */
+.app-container .content {
+  position: relative;
+  z-index: 2; /* Ensures content appears above the background */
+  padding: 10px; /* Adjust padding as necessary */
+  text-align: center;
+}
+

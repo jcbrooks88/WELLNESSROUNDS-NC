@@ -1,0 +1,140 @@
+/* Home.css (fancier version) */
+
+/* Main container for Home */
+.home-container {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  max-width: 525px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background: linear-gradient(
+      rgba(245, 239, 230, 0.9),
+      rgba(245, 239, 230, 0.95)
+    ),
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  backdrop-filter: blur(3px);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 1.5s ease forwards;
+  opacity: 1; /* Ensure opacity stays 1 after animation */
+/* Add a semi-transparent background to help with visibility */
+  background-color: rgba(255, 255, 255, 0.6); /* White with transparency */
+  padding: 18px 20px; /* Padding around text to create breathing room */
+  border-radius: 8px; /* Rounded corners for a cleaner look */
+  position: relative;
+  top: 50%;
+  left: 20%;
+}
+
+/* Text container */
+.home-text {
+  max-width: 800px;
+  margin-bottom: 3rem;
+  animation: fadeInUpBounce 1.2s ease-out 0.2s forwards;
+  opacity: 1; /* Ensure opacity stays 1 after animation */
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Title styling */
+/* Title styling */
+.home-title {
+  font-family: var(--font-heading);
+  font-size: 3rem; /* Increased font size for better emphasis */
+  color: var(--color-primary, #3b7d7b);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  max-width: 800px;
+  margin-bottom: 2rem;
+  animation: fadeInUpBounce 1.4s ease-out 0.4s forwards;
+  opacity: 1; /* Ensure opacity stays 1 after animation */
+  transition: color 0.3s ease, transform 0.3s ease;
+  
+  /* Add a text shadow to improve legibility */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Light shadow for contrast */
+  
+}
+.home-titile h1 {
+  font-size: 2.5rem;
+  color: #2e4b27; /* dark green */
+  margin: 0;
+}
+
+/* Supporting paragraph */
+.home-text p {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--color-accent, #3b7d7b); /* Ensure it's still readable */
+  margin-top: 1rem;
+  line-height: 1.8;  
+  /* Optional text shadow to make the text stand out more */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Logo image */
+.home-logo {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  animation: fadeInUpBounce 1.5s ease-out 0.6s forwards;
+  opacity: 1; /* Ensure opacity stays 1 after animation */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover effect on logo */
+.home-logo:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect on title */
+.home-title:hover {
+  color: var(--color-accent, #3b7d7b);
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInUpBounce {
+  0% {
+      opacity: 0;
+      transform: translateY(40px);
+  }
+  60% {
+      opacity: 1;
+      transform: translateY(-8px);
+  }
+  80% {
+      transform: translateY(4px);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks */
+@media (min-width: 768px) {
+  .home-title {
+      font-size: 3.5rem;
+  }
+
+  .home-text p {
+      font-size: 1.5rem;
+  }
+}
