@@ -7,9 +7,6 @@ const ProfilePage = () => {
       <div className="login-page-container">
         <UserProfile />
       </div>
-      <div className="timeline-page">
-      <h2>My Timeline</h2>
-     </div>
    </div>
     </>
   );

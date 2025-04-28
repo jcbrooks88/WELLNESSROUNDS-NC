@@ -23,7 +23,7 @@ export const seedDatabase = async () => {
       lastName: 'Doe',
       bio: 'Healthcare professional passionate about mental health advocacy.',
       aboutMe: 'I’m a former nurse turned software developer. I love creating tools that make a difference in people’s lives.', // about (NOT aboutMe!)
-      avatarUrl: 'https://example.com/avatar.jpg',
+      avatarUrl: 'https://ui-avatars.com/api/?name=Jane+Doe',
       workHistory: [
         {
           position: 'Registered Nurse',
