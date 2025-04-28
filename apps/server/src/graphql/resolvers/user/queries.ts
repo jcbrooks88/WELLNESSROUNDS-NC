@@ -3,10 +3,10 @@ import { User } from "../../../mongoDB/models/User.js";
 import Discussion from "../../../mongoDB/models/Discussion.js";
 
 export const userQueries = {
-  user: async (_: any, { userId }: any, context: any) => {
+  user: async (_: any, { _id }: any, context: any) => {
     if (!context.user) throw new AuthenticationError("You must be logged in.");
 
-    const user = await User.findById(userId)
+    const user = await User.findById(_id)
       .populate("profileComments.author", "_id username avatarUrl")
       .lean();
 

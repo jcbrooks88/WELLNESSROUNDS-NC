@@ -92,10 +92,10 @@ export const userMutations = {
     return user.toObject();
   },
 
-  addProfileComment: async (_: any, { userId, text }: any, context: any) => {
+  addProfileComment: async (_: any, { _id, text }: any, context: any) => {
     if (!context.user) throw new AuthenticationError("You must be logged in.");
   
-    const targetUser = await User.findById(userId);
+    const targetUser = await User.findById(_id);
     if (!targetUser) throw new Error("User not found.");
   
     const newComment = {

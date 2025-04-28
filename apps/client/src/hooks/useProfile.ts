@@ -2,16 +2,10 @@ import { useState, useRef } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { GET_USER_PROFILE } from "../graphql/user/queries";
 import { UPDATE_ABOUT_ME, UPLOAD_AVATAR, ADD_PROFILE_COMMENT } from "../graphql/user/mutations";
-import { useParams } from "react-router-dom";
 import { IUserProfile } from "@/graphql/user/types";
 
 export const useUserProfile = () => {
-  const { _id } = useParams<{ _id: string }>(); // 🔥 1. updated from "username" to "id"
-
-  const { loading, error, data } = useQuery<{ user: IUserProfile }>(GET_USER_PROFILE, {
-    variables: { userId: _id },
-    skip: !_id,
-  });
+  const { loading, error, data } = useQuery<{ me: IUserProfile }>(GET_USER_PROFILE);
 
   const [aboutMe, setAboutMe] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
@@ -21,6 +15,8 @@ export const useUserProfile = () => {
   const [updateAboutMe] = useMutation(UPDATE_ABOUT_ME);
   const [uploadAvatar] = useMutation(UPLOAD_AVATAR);
   const [addProfileComment] = useMutation(ADD_PROFILE_COMMENT);
+
+  const user = data?.me;
 
   const handleAboutMeSave = async () => {
     try {
@@ -43,16 +39,16 @@ export const useUserProfile = () => {
   };
 
   const handleAddComment = async () => {
-    if (!commentText.trim() || !user?._id) return; // 🛡️ safe guard
-  
+    if (!commentText.trim() || !user?._id) return;
+
     try {
       await addProfileComment({
-        variables: { userId: user._id, text: commentText },
+        variables: { username: user.username, text: commentText },
         update(cache, { data }) {
           if (!data?.addProfileComment) return;
-  
+
           const newComment = data.addProfileComment;
-  
+
           cache.modify({
             id: cache.identify({ __typename: "User", id: user._id }),
             fields: {
@@ -75,15 +71,12 @@ export const useUserProfile = () => {
           });
         },
       });
-  
+
       setCommentText("");
     } catch (err) {
       console.error(err);
     }
   };
-  
-
-  const user = data?.user;
 
   return {
     loading,

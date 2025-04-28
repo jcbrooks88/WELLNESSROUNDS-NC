@@ -38,5 +38,6 @@ export interface UserPayload {
     avatarUrl?: string;
     workHistory: IWorkHistoryItem[];
     profileComments: IProfileComment[];
+    me: boolean;
   }
   

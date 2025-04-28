@@ -32,12 +32,12 @@ export const userTypeDefs = gql`
 
   type AuthPayload {
     token: String!
-    user(userId: ID!): User!
+    user: User!
   }
 
   type Query {
     me: User
-    user(userId: ID!): User
+    user: User!
   }
 
   type Mutation {

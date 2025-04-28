@@ -32,8 +32,8 @@ export const ME_QUERY = gql`
 
 // Fetch user profile by username
 export const GET_USER_PROFILE = gql`
-  query GetUserProfile($id: ID!) {
-    user(userId: $userId) {
+  query GetUserProfile {
+    me {
       _id
       username
       firstName
@@ -41,18 +41,26 @@ export const GET_USER_PROFILE = gql`
       email
       aboutMe
       avatarUrl
+      discussions {
+        _id
+        title
+        createdAt
+      }
       workHistory {
+        _id
         position
-        description
         company
         startDate
         endDate
+        description
       }
       profileComments {
         _id
         text
         author {
+          _id
           username
+          avatarUrl
         }
       }
     }
