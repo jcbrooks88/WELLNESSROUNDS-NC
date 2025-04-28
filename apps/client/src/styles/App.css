@@ -107,6 +107,7 @@ body {
   background-color: var(--color-accent); /* Optional: fallback color */
   margin: 0;
   padding: 0;
+  
 }
 
 main {

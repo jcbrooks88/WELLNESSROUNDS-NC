@@ -4,18 +4,32 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
-    background-color: #ffffff;
+    background-color: var(--color-background);
     padding: 16px 24px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease, transform 0.3s ease;
-    
+    /*background-image: url('/images/stacked-zen.jpg');*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
   }
   
   /* When scrolled */
   .header-scrolled {
     padding: 8px 24px;
-    background-color: var(--color-background);
+    background-color: var(--color-accent);
+    opacity: .60;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
   
@@ -41,7 +55,8 @@
       width 0.3s ease, 
       opacity 0.3s ease;
     cursor: pointer;
-    background-color: #ffffff;
+    background-color: var(--color-background);
+
     
     /* Fade-in animation */
     opacity: 0;
@@ -82,7 +97,7 @@
   .header-title {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--color-heading);
+    color: var(--color-secondary);
     margin-bottom: 4px;
     letter-spacing: 0.5px;
     line-height: 1.2;

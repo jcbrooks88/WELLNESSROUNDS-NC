@@ -1,3 +1,123 @@
+/* Discussions Page Container */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.discussion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 20px;
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.discussions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 20px;
+  max-width: 800px;
+  width: 100%;
+  margin: 40px auto;
+  border-radius: 12px;
+  gap: 24px;
+}
+
+/* Link Wrapper */
+.discussion-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Individual Discussion Card */
+.discussion-card {
+  background: linear-gradient(135deg, #B06B44 0%, #F5EFE6 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
+}
+
+.discussion-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+/* Title Styling */
+.discussion-card h2 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+/* Content Preview */
+.discussion-card p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* Keywords Section */
+.discussion-keywords {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #10b981;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.discussion-keywords::before {
+  content: "🏷️"; /* Tag icon */
+  font-size: 1.1rem;
+}
+
+/* Posted By Section */
+.discussion-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.discussion-author::before {
+  content: "👤"; /* User icon */
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .discussion-card {
+    padding: 20px;
+  }
+
+  .discussion-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .discussion-card p,
+  .discussion-keywords,
+  .discussion-author {
+    font-size: 0.95rem;
+  }
+}
+
 /* General container polish */
 .discussions-form-container {
   padding: 32px;

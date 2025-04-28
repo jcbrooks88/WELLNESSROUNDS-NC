@@ -3,7 +3,6 @@ import Discussions from "../../components/features/discussions/Discussions";
 import SearchBar from "../../components/features/discussSearch/SearchBar";
 import SearchResultsList from "../../components/features/discussSearch/SearchResultsList";
 import { useDiscussions } from "../../hooks/useDiscussions";
-import "../../styles/App.css";
 import "./style.css";
 
 export default function DiscussionPage() {
@@ -22,7 +21,7 @@ export default function DiscussionPage() {
 
   return (
     <div className="discussion-page">
-      <h1>All Discussions</h1>
+      
 
       {!showModal && (
         <div className="search-again-container">
@@ -32,6 +31,9 @@ export default function DiscussionPage() {
         </div>
       )}
 
+      <h1>All Discussions</h1>
+      <p>Click on a discussion to view more details.</p>
+      
       <Discussions discussions={allDiscussions} />
 
       {showModal && (

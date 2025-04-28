@@ -28,7 +28,7 @@ const Header = () => {
         <div className="flex-shrink-0">
           <Link to="/">
             <img
-              src="/images/WRNC-transparent.png"
+              src="/images/WRNC-NEW-transparent.png"
               alt="Site Logo"
               className="header-logo"
             />
@@ -36,7 +36,7 @@ const Header = () => {
         </div>
 
         <div className="header-content">
-          <h1 className="header-title">Wellness Rounds NC</h1>
+        <h1 className="header-title">A Place to Find Your Safe Space</h1>
           <NavBar />
         </div>
       </div>
