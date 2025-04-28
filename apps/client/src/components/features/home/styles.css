@@ -1,4 +1,12 @@
 /* Home.css (fancier version) */
+.home {
+  display: center;
+  padding: 2rem;
+  margin: 0 auto; /* Center the container */
+  background-color: transparent; /* Light background for contrast */
+  animation: fadeInUpBounce 1.2s ease-out 0.2s forwards;
+  max-width: 800px; 
+}
 
 /* Main container for Home */
 .home-container {
@@ -26,7 +34,7 @@
   opacity: 1; /* Ensure opacity stays 1 after animation */
 /* Add a semi-transparent background to help with visibility */
   background-color: rgba(255, 255, 255, 0.6); /* White with transparency */
-  padding: 18px 20px; /* Padding around text to create breathing room */
+  padding: 24px 18px; /* Padding around text to create breathing room */
   border-radius: 8px; /* Rounded corners for a cleaner look */
   position: relative;
   top: 50%;
@@ -36,6 +44,7 @@
 /* Text container */
 .home-text {
   max-width: 800px;
+  height: auto;
   margin-bottom: 3rem;
   animation: fadeInUpBounce 1.2s ease-out 0.2s forwards;
   opacity: 1; /* Ensure opacity stays 1 after animation */
@@ -79,20 +88,26 @@
 
 /* Logo image */
 .home-logo {
-  max-width: 300px;
-  width: 100%;
+  max-width: 400px;
+  width: 350px;
   height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  animation: fadeInUpBounce 1.5s ease-out 0.6s forwards;
+  display: inline-block;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 1%;
+  margin-bottom: 0%;
   opacity: 1; /* Ensure opacity stays 1 after animation */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Hover effect on logo */
-.home-logo:hover {
-  transform: scale(1.08) rotate(1deg);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+.home-subheading {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-primary, #3b7d7b);
+  margin-bottom: 1rem;
+  padding: 0%;
+  animation: fadeInUpBounce 1.6s ease-out 0.6s forwards;
+  opacity: 1; /* Ensure opacity stays 1 after animation */
 }
 
 /* Hover effect on title */

@@ -18,7 +18,7 @@ function App() {
     <div className="app-container">
       <Router>
       <Header />
-      <div className="pt-32 px-4"> {/* Padding top so content isn’t hidden behind fixed header */}
+      <div className="pt-32 px-4" style={{ flex: '1 0 auto' }}> 
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
