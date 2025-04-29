@@ -6,6 +6,8 @@ export interface IUser {
   }
 
   export interface IWorkHistoryItem {
+    [x: string]: string;
+    [x: string]: number;
     position: string;
     company: string;
     startDate: Date;
@@ -32,12 +34,13 @@ export interface UserPayload {
   }
   
   export interface IUserProfile extends IUser {
-    firstName: string;
-    lastName: string;
-    aboutMe?: string;
-    avatarUrl?: string;
-    workHistory: IWorkHistoryItem[];
-    profileComments: IProfileComment[];
-    me: boolean;
-  }
+      [x: string]: string | IWorkHistoryItem[] | IProfileComment[] | boolean | undefined;
+      firstName: string;
+      lastName: string;
+      aboutMe?: string;
+      avatarUrl?: string;
+      workHistory: IWorkHistoryItem[];
+      profileComments: IProfileComment[];
+      me: boolean;
+    }
   

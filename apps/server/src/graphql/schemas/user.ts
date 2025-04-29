@@ -11,6 +11,8 @@ export const userTypeDefs = gql`
     discussions: [Discussion]
     aboutMe: String
     avatarUrl: String
+    location: String
+    role: String
     workHistory: [WorkHistory]
     profileComments: [ProfileComment]
   }
@@ -49,12 +51,18 @@ export const userTypeDefs = gql`
       password: String!
     ): AuthPayload
 
+    updateUserProfile(input: UpdateUserProfileInput!): User
     login(email: String!, password: String!): AuthPayload
-
     refreshAccessToken: AuthPayload
-
     updateAboutMe(aboutMe: String!): User
-
     addProfileComment(username: String!, text: String!): ProfileComment
+  }
+  input UpdateUserProfileInput {
+    firstName: String
+    lastName: String
+    email: String
+    avatarUrl: String
+    bio: String
+    workHistory: [WorkHistoryInput]
   }
 `;

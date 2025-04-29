@@ -67,3 +67,27 @@ export const ADD_PROFILE_COMMENT = gql`
   }
 `;
 
+export const UPDATE_USER_PROFILE_FIELD = gql`
+  mutation UpdateUserProfileField($input: UpdateUserFieldInput!) {
+    updateUserProfileField(input: $input) {
+      success
+      message
+      updatedUser {
+        username
+        location
+        role
+      }
+    }
+  }
+`;
+export const UPDATE_USER_PROFILE = gql`
+  mutation UpdateUserProfile($input: UpdateUserProfileInput!) {
+    updateUserProfile(input: $input) {
+      _id
+      username
+      location
+      role
+      aboutMe
+    }
+  }
+`;

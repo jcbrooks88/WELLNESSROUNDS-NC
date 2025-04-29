@@ -24,6 +24,8 @@ export interface IUser {
   comments?: string[];
   createdAt?: Date;
   updatedAt?: Date;
+  location?: String;
+  role?: String;
   comparePassword(candidatePassword: string): Promise<boolean>;
   profileComments?: Array<{
     text: string;
@@ -33,6 +35,7 @@ export interface IUser {
 }
 
 export interface UserPayload {
+  [x: string]: any;
   username: string;
   email: string;
   _id: string;

@@ -18,6 +18,8 @@ const userSchema = new Schema<IUser>(
     bio: { type: String, default: "" },
     aboutMe: { type: String, default: "" },
     avatarUrl: { type: String, default: "" },
+    location: { type: String, default: "" },
+    role: { type: String, default: "user" },
     workHistory: {
       type: [
         {

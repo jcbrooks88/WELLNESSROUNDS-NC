@@ -1,24 +1,10 @@
+import { useState } from "react";
 import { useUserProfile } from "../../../hooks/useProfile.js";
+import { useUpdateUserProfile } from "../../../hooks/useUpdateProfile";
 import WorkHistoryItem from "./WorkHistoryItem";
 import ProfileComment from "./ProfileComment";
+import EditableField from "./EditableField";
 import "./styles.css";
-
-interface WorkHistoryItemType {
-  _id?: string;
-  position?: string;
-  company?: string;
-  startDate?: Date;
-  endDate?: Date;
-  description?: string;
-}
-
-interface ProfileCommentType {
-  _id?: string;
-  text?: string;
-  author?: {
-    username: string;
-  };
-}
 
 const UserProfile = () => {
   const {
@@ -37,33 +23,66 @@ const UserProfile = () => {
     handleAddComment,
   } = useUserProfile();
 
+  const [updateUserProfile] = useUpdateUserProfile();
+  const [, setProfile] = useState(user);
+
+  const handleFieldSave = async (field: string, value: string): Promise<void> => {
+    try {
+      const { data } = await updateUserProfile({
+        variables: { input: { [field]: value } },
+      });
+      if (data?.updateUserProfile) {
+        setProfile(data.updateUserProfile);
+      }
+    } catch (err) {
+      console.error("Failed to update:", err);
+    }
+  };
+
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p>Error loading profile.</p>;
   if (!user) return <div>No user data found.</div>;
 
   return (
-    <div className="user-profile-container">
-      {/* Main Profile Section */}
-      <div className="user-profile-main">
-        <div className="flex flex-col items-center">
-          <img
-            src={user.avatarUrl || "/images/WRNC.png"}
-            alt="User Avatar"
-            className="user-avatar"
-            onClick={() => fileInputRef.current?.click()}
-          />
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="hidden"
-            onChange={handleAvatarUpload}
-            accept="image/*"
-          />
-          <h1 className="user-name">{user.username}</h1>
-        </div>
+    <div className="user-profile-layout">
+      {/* Left Panel */}
+      <div className="profile-info-panel">
+        <div className="profile-banner" />
+        <img
+          src={user.avatarUrl || "/images/WRNC.png"}
+          alt="User Avatar"
+          className="user-avatar"
+          onClick={() => fileInputRef.current?.click()}
+        />
+        <input
+          type="file"
+          ref={fileInputRef}
+          className="hidden"
+          onChange={handleAvatarUpload}
+          accept="image/*"
+        />
 
-        {/* About Me */}
-        <div className="w-full mt-4">
+        <EditableField
+          label="Username"
+          field="username"
+          value={user.username}
+          onSave={handleFieldSave}
+        />
+        <EditableField
+          label="Location"
+          field="location"
+          value={typeof user.location === "string" ? user.location : ""}
+          onSave={handleFieldSave}
+        />
+        <EditableField
+          label="Role"
+          field="role"
+          value={typeof user.role === "string" ? user.role : ""}
+          onSave={handleFieldSave}
+        />
+
+        {/* About Me Section */}
+        <div className="mt-4">
           <h2 className="section-title">About Me</h2>
           {isEditing ? (
             <div className="about-me-edit">
@@ -90,40 +109,44 @@ const UserProfile = () => {
         </div>
 
         {/* Work History */}
-        <div className="w-full mt-6">
+        <div className="mt-6">
           <h2 className="section-title">Work History</h2>
-          {user.workHistory && user.workHistory.length > 0 ? (
+          {user.workHistory?.length > 0 ? (
             <ul className="work-history-list">
-              {user.workHistory.map((job: WorkHistoryItemType, index: number) => {
-                const mappedJob = {
-                  _id: job._id || index.toString(),
-                  position: job.position || "Unknown Position",
-                  company: job.company || "Unknown Company",
-                  startDate: job.startDate ? job.startDate.toString() : "Unknown Start Date",
-                  endDate: job.endDate ? job.endDate.toString() : undefined,
-                  description: job.description || "No description provided",
-                };
-                return <WorkHistoryItem key={mappedJob._id} job={mappedJob} />;
-              })}
+              {user.workHistory.map((job, index) => (
+                <WorkHistoryItem
+                  key={job._id || index}
+                  job={{
+                    _id: job._id || index.toString(),
+                    position: job.position || "Unknown",
+                    company: job.company || "Unknown",
+                    startDate: job.startDate?.toString() || "",
+                    endDate: job.endDate?.toString(),
+                    description: job.description || "No description provided",
+                  }}
+                />
+              ))}
             </ul>
           ) : (
-            <p className="mt-2">No work history listed.</p>
+            <p>No work history listed.</p>
           )}
         </div>
       </div>
 
-      {/* Comments Timeline Sidebar */}
-      <div className="user-profile-comments">
+      {/* Right Panel */}
+      <div className="comment-timeline-panel">
         <h2 className="section-title">Timeline</h2>
-        <div className="comments-scrollable">
-          {user.profileComments.map((comment: ProfileCommentType, index: number) => {
-            const mappedComment = {
-              _id: comment._id || index.toString(),
-              text: comment.text || "No text provided",
-              author: comment.author || { username: "Unknown Author" },
-            };
-            return <ProfileComment key={mappedComment._id} comment={mappedComment} />;
-          })}
+        <div className="comment-timeline">
+          {user.profileComments.map((comment, index) => (
+            <ProfileComment
+              key={comment._id || index}
+              comment={{
+                _id: comment._id || index.toString(),
+                text: comment.text || "No text provided",
+                author: comment.author || { username: "Unknown Author" },
+              }}
+            />
+          ))}
         </div>
 
         <div className="comment-input-container">
