@@ -4,6 +4,7 @@ import { graphqlRequest } from "../../../api/graphqlRequest";
 import { SEARCH_DISCUSSIONS_QUERY } from "../../../graphql/discussion/queries.js";
 import { useAuth } from "../../../context/AuthContext"; // 👈 import useAuth
 import "../../../styles/App.css";
+import "./styles.css";
 
 const keywordOptions = [
   "Mental Health", "Burnout", "Career Change", "Self-Care", "Therapy",

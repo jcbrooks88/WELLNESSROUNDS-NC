@@ -1,3 +1,6 @@
+import './styles.css';
+
+
 type ProfileCommentProps = {
   comment: {
     _id: string;

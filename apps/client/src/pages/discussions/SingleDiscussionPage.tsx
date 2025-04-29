@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getDiscussionByID } from "../../hooks/useDiscussions.js";
+import "./styles.css";
 
 const SingleDiscussionPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

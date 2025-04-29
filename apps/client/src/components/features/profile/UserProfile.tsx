@@ -42,23 +42,25 @@ const UserProfile = () => {
   if (!user) return <div>No user data found.</div>;
 
   return (
-    <div className="user-profile">
-      <div className="flex flex-col items-center">
-        <img
-          src={user.avatarUrl || "/images/WRNC.png"}
-          alt="User Avatar"
-          className="user-avatar"
-          onClick={() => fileInputRef.current?.click()}
-        />
-        <input
-          type="file"
-          ref={fileInputRef}
-          className="hidden"
-          onChange={handleAvatarUpload}
-          accept="image/*"
-        />
-
-        <h1 className="user-name">{user.username}</h1>
+    <div className="user-profile-container">
+      {/* Main Profile Section */}
+      <div className="user-profile-main">
+        <div className="flex flex-col items-center">
+          <img
+            src={user.avatarUrl || "/images/WRNC.png"}
+            alt="User Avatar"
+            className="user-avatar"
+            onClick={() => fileInputRef.current?.click()}
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleAvatarUpload}
+            accept="image/*"
+          />
+          <h1 className="user-name">{user.username}</h1>
+        </div>
 
         {/* About Me */}
         <div className="w-full mt-4">
@@ -103,38 +105,35 @@ const UserProfile = () => {
                 };
                 return <WorkHistoryItem key={mappedJob._id} job={mappedJob} />;
               })}
-
             </ul>
           ) : (
             <p className="mt-2">No work history listed.</p>
           )}
         </div>
+      </div>
 
-        {/* Comments */}
-        <div className="comment-section">
-          <h2 className="section-title">Comments</h2>
-          <div className="mt-2">
+      {/* Comments Timeline Sidebar */}
+      <div className="user-profile-comments">
+        <h2 className="section-title">Timeline</h2>
+        <div className="comments-scrollable">
           {user.profileComments.map((comment: ProfileCommentType, index: number) => {
             const mappedComment = {
               _id: comment._id || index.toString(),
               text: comment.text || "No text provided",
               author: comment.author || { username: "Unknown Author" },
             };
-              return <ProfileComment key={mappedComment._id} comment={mappedComment} />;
-        })}
+            return <ProfileComment key={mappedComment._id} comment={mappedComment} />;
+          })}
+        </div>
 
-
-          </div>
-
-          <div className="comment-input-container">
-            <input
-              type="text"
-              placeholder="Leave a comment..."
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-            />
-            <button className="btn-primary" onClick={handleAddComment}>Post</button>
-          </div>
+        <div className="comment-input-container">
+          <input
+            type="text"
+            placeholder="Leave a comment..."
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+          <button className="btn-primary" onClick={handleAddComment}>Post</button>
         </div>
       </div>
     </div>

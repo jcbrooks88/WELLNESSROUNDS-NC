@@ -1,5 +1,5 @@
 import Dashboard from "../../components/features/dashboard/Dashboard";
-import "./style.css";
+import "./styles.css";
 
 const DashboardPage = () => {
   return (

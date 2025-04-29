@@ -1,3 +1,5 @@
+import './styles.css';
+
 type WorkHistoryItemProps = {
   job: {
     _id: string;

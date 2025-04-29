@@ -119,3 +119,48 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   }
 
+  .single-discussion {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e1e1e;
+    line-height: 1.6;
+  }
+  
+  .single-discussion h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2a2a2a;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .single-discussion p {
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .single-discussion strong {
+    font-weight: 600;
+    color: #444;
+  }
+  
+  @media (max-width: 600px) {
+    .single-discussion {
+      padding: 1.5rem;
+    }
+  
+    .single-discussion h1 {
+      font-size: 1.5rem;
+    }
+  
+    .single-discussion p {
+      font-size: 1rem;
+    }
+  }
+  

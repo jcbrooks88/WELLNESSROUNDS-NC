@@ -3,7 +3,7 @@ import Discussions from "../../components/features/discussions/Discussions";
 import SearchBar from "../../components/features/discussSearch/SearchBar";
 import SearchResultsList from "../../components/features/discussSearch/SearchResultsList";
 import { useDiscussions } from "../../hooks/useDiscussions";
-import "./style.css";
+import "./styles.css";
 
 export default function DiscussionPage() {
   const { discussions: allDiscussions, loading, error } = useDiscussions();
@@ -33,7 +33,7 @@ export default function DiscussionPage() {
 
       <h1>All Discussions</h1>
       <p>Click on a discussion to view more details.</p>
-      
+
       <Discussions discussions={allDiscussions} />
 
       {showModal && (
