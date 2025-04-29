@@ -7,6 +7,8 @@ import { resolvers } from './graphql/resolvers/index.js';
 import mongoose from 'mongoose';
 import { authenticate } from './utils/auth.js';
 import cors from 'cors';
+import { Application } from 'express';
+
 
 import cookieParser from 'cookie-parser';
 import { ENV } from './utils/configLoader.js';
@@ -14,8 +16,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-const app = express();
+const app: Application = express();
 const PORT = ENV.PORT || 4000;
+
 
 // CORS setup
 app.use(cors({

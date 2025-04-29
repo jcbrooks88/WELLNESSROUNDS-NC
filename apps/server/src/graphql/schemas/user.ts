@@ -65,4 +65,13 @@ export const userTypeDefs = gql`
     bio: String
     workHistory: [WorkHistoryInput]
   }
+
+  input WorkHistoryInput {
+  company: String!
+  position: String!
+  startDate: String!
+  endDate: String
+  description: String
+}
+
 `;
